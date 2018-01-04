@@ -1,8 +1,9 @@
 import unittest
 from app import app, db
-from app.models import User
+from app.models import User, Post
 from hashlib import md5
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime, timedelta
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
@@ -25,7 +26,15 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u.avatar(128), "https://www.gravatar.com/avatar/{}?d=identicon&s={}".format(digest, 128))
 
     def test_integrity(self):
-        u = User(username='susan', email='susan@sample.com')
+        u = User()
+
+        with self.assertRaisesRegex(IntegrityError, 'NOT NULL constraint failed'):
+            db.session.add(u)
+            db.session.commit()
+
+        db.session.rollback()
+        u.username='susan'
+        u.email='susan@sample.com'
 
         with self.assertRaisesRegex(IntegrityError, 'NOT NULL constraint failed'):
             db.session.add(u)
@@ -44,7 +53,7 @@ class UserModelCase(unittest.TestCase):
 
         u1.follow(u2)
         db.session.commit()
-        #self.assertTrue(u1.is_following(u2))
+        self.assertTrue(u1.is_following(u2))
         self.assertEqual(u1.followed.count(), 1)
         self.assertEqual(u1.followed.first().username, 'susan')
         self.assertEqual(u2.followers.count(), 1)
@@ -53,8 +62,43 @@ class UserModelCase(unittest.TestCase):
         u1.unfollow(u2)
         db.session.commit()
         self.assertFalse(u1.is_following(u2))
-        #self.assertEqual(u1.followed.count(), 0)
-        #self.assertEqual(u2.followers.count(), 0)
+        self.assertEqual(u1.followed.count(), 0)
+        self.assertEqual(u2.followers.count(), 0)
+
+    def test_follow_posts(self):
+        u1 = User(username='john', email='john@sample.com')
+        u2 = User(username='susan', email='susan@sample.com')
+        u3 = User(username='mary', email='mary@sample.com')
+        u4 = User(username='david', email='david@sample.com')
+        u1.set_password("john")
+        u2.set_password("susan")
+        u3.set_password("mary")
+        u4.set_password("david")
+        db.session.add_all([u1, u2, u3, u4])
+
+        now = datetime.utcnow()
+        p1 = Post(body="post from " + u1.username, author=u1, timestamp=now + timedelta(seconds=4))
+        p2 = Post(body="post from " + u2.username, author=u2, timestamp=now + timedelta(seconds=3))
+        p3 = Post(body="post from " + u3.username, author=u3, timestamp=now + timedelta(seconds=2))
+        p4 = Post(body="post from " + u4.username, author=u4, timestamp=now + timedelta(seconds=1))
+        db.session.add_all([p1, p2, p3, p4])
+        db.session.commit()
+
+        u1.follow(u2) # john follows susan
+        u1.follow(u4) # john follows david
+        u2.follow(u3) # susan follows mary
+        u3.follow(u4) # mary follows david
+        db.session.commit()
+
+        f1 = u1.followed_posts().all() # john should have own p1, susan p2, david p4 posts
+        f2 = u2.followed_posts().all() # susan should have own p2, mary p3 posts
+        f3 = u3.followed_posts().all() # mary should have own p3, david p4 posts
+        f4 = u4.followed_posts().all() # david should have own p4 posts
+        self.assertEqual(f1, [p1, p2, p4])
+        self.assertEqual(f2, [p2, p3])
+        self.assertEqual(f3, [p3, p4])
+        self.assertEqual(f4, [p4])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
