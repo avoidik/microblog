@@ -1,9 +1,10 @@
-from datetime import datetime
-from app import db
+from datetime import datetime, timedelta
+from app import app, db
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 from app import login
 from hashlib import md5
+import jwt
 
 followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
@@ -70,6 +71,26 @@ class User(UserMixin, db.Model):
                 filter(followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
+
+    def get_reset_password_token(self, expires_in=600):
+        token = jwt.encode(
+            {'reset_password': self.id, 'exp': datetime.utcnow() + timedelta(minutes=10), 'iat': datetime.utcnow()},
+            app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
+        return token.decode("utf-8")
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        result = None
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            result = User.query.get(data['reset_password'])
+        except jwt.ExpiredSignatureError:
+            pass
+        except jwt.exceptions.DecodeError:
+            pass
+        return result
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

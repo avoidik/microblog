@@ -72,3 +72,23 @@ class PostForm(FlaskForm):
         Length(min=5, max=140, message="Post text length betweetn 5 and 140")
     ])
     submit = SubmitField("Submit")
+
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField("email", validators=[
+        InputRequired(message="Email required"),
+        Length(min=3, max=64, message="Email length between 3 and 64"),
+        Email(message="Email is invalid")
+    ])
+    submit = SubmitField("Reset")
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField("Password", validators=[
+        InputRequired(message="Password required"),
+        Length(min=3, max=64, message="Password length between 3 and 64")
+    ])
+    password2 = PasswordField("Repeat password", validators=[
+        InputRequired(message="Password repeat required"),
+        Length(min=3, max=64, message="Password repeat length between 3 and 64"),
+        EqualTo("password", message="Passwords doesn't match")
+    ])
+    submit = SubmitField("Submit")
