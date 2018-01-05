@@ -90,6 +90,11 @@ class UserModelCase(unittest.TestCase):
         u3.follow(u4) # mary follows david
         db.session.commit()
 
+        self.assertEqual(u1.followed_posts().count(), 3)
+        self.assertEqual(u2.followed_posts().count(), 2)
+        self.assertEqual(u3.followed_posts().count(), 2)
+        self.assertEqual(u4.followed_posts().count(), 1)
+
         f1 = u1.followed_posts().all() # john should have own p1, susan p2, david p4 posts
         f2 = u2.followed_posts().all() # susan should have own p2, mary p3 posts
         f3 = u3.followed_posts().all() # mary should have own p3, david p4 posts
@@ -98,7 +103,6 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(f2, [p2, p3])
         self.assertEqual(f3, [p3, p4])
         self.assertEqual(f4, [p4])
-
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

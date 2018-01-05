@@ -59,6 +59,8 @@ class User(UserMixin, db.Model):
         posts = Post.query. \
                 join(followers, (followers.c.followed_id == Post.user_id), isouter=True). \
                 filter((followers.c.follower_id == self.id) | (Post.user_id == self.id)). \
+                group_by(Post.id). \
+                group_by(Post.user_id). \
                 order_by(Post.timestamp.desc())
         return posts
 

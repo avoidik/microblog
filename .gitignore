@@ -2,3 +2,4 @@ __pycache__/
 .vscode/
 venv/
 app/logs/
+app.db

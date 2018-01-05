@@ -65,3 +65,10 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError("Such username is taken {} {}!".format(self.username.data, username.data))
+
+class PostForm(FlaskForm):
+    post = TextAreaField("Post", validators=[
+        InputRequired(message="Post text required"),
+        Length(min=5, max=140, message="Post text length betweetn 5 and 140")
+    ])
+    submit = SubmitField("Submit")

@@ -1,0 +1,9 @@
+{% if prev_url %}
+<a href="{{ prev_url }}">&lt;&nbsp;Newer posts</a>
+{% endif %}
+{% if prev_url and next_url %}
+&vert;
+{% endif %}
+{% if next_url %}
+<a href="{{ next_url }}">Older posts&nbsp;&gt;</a>
+{% endif %}
