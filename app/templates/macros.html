@@ -1,9 +1,23 @@
 {% macro with_errors(field) %}
     {% if field.errors %}
-        <ul class="errors">
-            {% for error in field.errors %}
-            <li>{{ error|e }}</li>
-            {% endfor %}
-        </ul>
+        {% for error in field.errors %}
+        <p class="help-block">{{ error|e }}</p>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_field(field) %}
+    <div class="form-group {%- if required %} required{% endif %} {%- if field.errors %} has-error{% endif %}">
+        {{ field.label(for=field.name, class="control-label") }}
+        {{ field(class="form-control", **kwargs)|safe }}
+        {{ with_errors(field) }}
+    </div>
+{% endmacro %}
+
+{% macro nav_link(endpoint, name) %}
+    {% if request.endpoint.endswith(endpoint) %}
+        <li class="active"><a href="{{ url_for(endpoint, **kwargs) }}">{{name}}</a></li>
+    {% else %}
+        <li><a href="{{ url_for(endpoint, **kwargs) }}">{{name}}</a></li>
     {% endif %}
 {% endmacro %}

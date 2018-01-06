@@ -74,7 +74,7 @@ class PostForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class ResetPasswordRequestForm(FlaskForm):
-    email = StringField("email", validators=[
+    email = StringField("Email", validators=[
         InputRequired(message="Email required"),
         Length(min=3, max=64, message="Email length between 3 and 64"),
         Email(message="Email is invalid")

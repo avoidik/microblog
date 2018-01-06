@@ -2,25 +2,21 @@
 
 {% import "macros.html" as macros %}
 
-{% block content %}
+{% block app_content %}
 <h1>Sign In</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}<br>
-        {{ macros.with_errors(form.username) }}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}<br>
-        {{ macros.with_errors(form.password) }}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-    <p>{{ form.submit() }}</p>
-</form>
-<p>
-    New user? <a href="{{ url_for('register') }}">Register!</a><br>
-    Forgot password? <a href="{{ url_for('reset_password_request') }}">Reset!</a>
-</p>
+<div class="row">
+    <div class="col-md-4">
+        <form action="" method="post" class="form" role="form">
+            {{ form.hidden_tag() }}
+            {{ macros.render_field(form.username, required=True) }}
+            {{ macros.render_field(form.password, required=True) }}
+            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            <p>{{ form.submit(class="btn btn-primary") }}</p>
+        </form>
+        <p>
+            New user? <a href="{{ url_for('register') }}">Register!</a><br>
+            Forgot password? <a href="{{ url_for('reset_password_request') }}">Reset!</a>
+        </p>
+    </div>
+</div>
 {% endblock %}
