@@ -16,3 +16,10 @@ export MAIL_USE_TLS=1
 export MAIL_USERNAME=<your-gmail-username>
 export MAIL_PASSWORD=<your-gmail-password>
 ```
+## Babel
+```
+pybabel extract -F babel.cfg -k _l -o messages.pot .
+pybabel init -i messages.pot -d app/translations -l ru
+pybabel compile -d app/translations
+pybabel update -i messages.pot -d app/translations
+```
