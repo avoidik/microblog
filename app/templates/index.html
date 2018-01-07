@@ -5,7 +5,7 @@
 {% block app_content %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h1>Hello, {{ current_user.username }}!</h1>
+        <h1>{{ _("Hello, %(username)s!", username=current_user.username) }}</h1>
         {% if form %}
         <form action="" method="post" class="form" role="form">
             {{ form.hidden_tag() }}

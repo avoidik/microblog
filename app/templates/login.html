@@ -3,7 +3,7 @@
 {% import "macros.html" as macros %}
 
 {% block app_content %}
-<h1>Sign In</h1>
+<h1>{{ _("Sign In") }}</h1>
 <div class="row">
     <div class="col-md-4">
         <form action="" method="post" class="form" role="form">
@@ -14,8 +14,8 @@
             <p>{{ form.submit(class="btn btn-primary") }}</p>
         </form>
         <p>
-            New user? <a href="{{ url_for('register') }}">Register!</a><br>
-            Forgot password? <a href="{{ url_for('reset_password_request') }}">Reset!</a>
+            {{ _("New user?") }} <a href="{{ url_for('register') }}">{{ _("Register!") }}</a><br>
+            {{ _("Forgot password?") }} <a href="{{ url_for('reset_password_request') }}">{{ _("Reset!") }}</a>
         </p>
     </div>
 </div>

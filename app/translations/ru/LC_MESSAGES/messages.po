@@ -1,0 +1,335 @@
+# Russian translations for .
+# Copyright (C) 2018 ORGANIZATION
+# This file is distributed under the same license as the  project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: microblog\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-01-07 20:23+0200\n"
+"PO-Revision-Date: 2018-01-07 20:29+0200\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 2.0.5\n"
+
+#: app/__init__.py:20
+msgid "Please log in to access this page."
+msgstr "Войдите для доступа к этой странице."
+
+#: app/__init__.py:38
+msgid "Microblog Error Report"
+msgstr "Отчет об ошибках Microblog"
+
+#: app/email.py:19
+msgid "Reset your password"
+msgstr "Сбросить пароль"
+
+#: app/forms.py:8 app/forms.py:20 app/forms.py:51
+msgid "Username"
+msgstr "Пользователь"
+
+#: app/forms.py:9
+msgid "Username can not be empty"
+msgstr "Имя пользователя не может быть пустым"
+
+#: app/forms.py:10 app/forms.py:22 app/forms.py:53
+msgid "Username length between 3 and 32"
+msgstr "Длина имени пользователя от 3 до 32"
+
+#: app/forms.py:12 app/forms.py:29 app/forms.py:86
+msgid "Password"
+msgstr "Пароль"
+
+#: app/forms.py:13
+msgid "Password can not be empty"
+msgstr "Пароль не может быть пустым"
+
+#: app/forms.py:14
+msgid "Password length between 3 and 32"
+msgstr "Длина пароля от 3 до 32"
+
+#: app/forms.py:16
+msgid "Remember Me"
+msgstr "Запомнить"
+
+#: app/forms.py:17 app/routes.py:47 app/templates/login.html:6
+msgid "Sign In"
+msgstr "Вход"
+
+#: app/forms.py:21 app/forms.py:52
+msgid "Username required"
+msgstr "Требуется имя пользователя"
+
+#: app/forms.py:24 app/forms.py:78
+msgid "Email"
+msgstr "Email"
+
+#: app/forms.py:25 app/forms.py:79
+msgid "Email required"
+msgstr "Требуется email"
+
+#: app/forms.py:26 app/forms.py:80
+msgid "Email length between 3 and 64"
+msgstr "Длина email от 3 до 64"
+
+#: app/forms.py:27 app/forms.py:81
+msgid "Email is invalid"
+msgstr "Некорректный email"
+
+#: app/forms.py:30 app/forms.py:87
+msgid "Password required"
+msgstr "Требуется пароль"
+
+#: app/forms.py:31 app/forms.py:88
+msgid "Password length between 3 and 64"
+msgstr "Длина пароля от 3 до 64"
+
+#: app/forms.py:33 app/forms.py:90
+msgid "Repeat password"
+msgstr "Повтор пароля"
+
+#: app/forms.py:34 app/forms.py:91
+msgid "Password repeat required"
+msgstr "Требуется повтор пароля"
+
+#: app/forms.py:35 app/forms.py:92
+msgid "Password repeat length between 3 and 64"
+msgstr "Длина повтора пароля от 3 до 64"
+
+#: app/forms.py:36 app/forms.py:93
+msgid "Passwords doesn't match"
+msgstr "Пароли не совпадают"
+
+#: app/forms.py:38 app/routes.py:66 app/templates/base.html:40
+#: app/templates/register.html:5
+msgid "Register"
+msgstr "Регистрация"
+
+#: app/forms.py:43
+msgid "Username already exist"
+msgstr "Пользователь существует"
+
+#: app/forms.py:48
+msgid "Email already taken"
+msgstr "Email уже существует"
+
+#: app/forms.py:55
+msgid "About me"
+msgstr "О себе"
+
+#: app/forms.py:58 app/forms.py:75 app/forms.py:95
+msgid "Submit"
+msgstr "Отправить"
+
+#: app/forms.py:68
+#, python-format
+msgid "Such username is taken %(username)s!"
+msgstr "Пользователь %(username)s уже существует!"
+
+#: app/forms.py:71
+msgid "Post"
+msgstr "Отправить"
+
+#: app/forms.py:72
+msgid "Post text required"
+msgstr "Требуется текст для отправки"
+
+#: app/forms.py:73
+msgid "Post text length betweetn 5 and 140"
+msgstr "Длина текста для отправки между 5 и 140"
+
+#: app/forms.py:83 app/templates/reset_password.html:6
+#: app/templates/reset_password_request.html:6
+msgid "Reset"
+msgstr "Сброс"
+
+#: app/routes.py:19
+msgid "Post added"
+msgstr "Запись добавлена"
+
+#: app/routes.py:29 app/templates/base.html:33
+msgid "Home"
+msgstr "Главная"
+
+#: app/routes.py:40
+msgid "Invalid username or password"
+msgstr "Некорректный пользователь или пароль"
+
+#: app/routes.py:64
+msgid "Congratulations! You are registered user!"
+msgstr "Поздравляем! Вы зарегистрированы!"
+
+#: app/routes.py:79 app/templates/base.html:35 app/templates/base.html:43
+msgid "Profile"
+msgstr "Профиль"
+
+#: app/routes.py:90
+msgid "Changes have been saved!"
+msgstr "Изменения сохранены!"
+
+#: app/routes.py:95 app/templates/edit_profile.html:6
+msgid "Edit Profile"
+msgstr "Изменить профиль"
+
+#: app/routes.py:102 app/routes.py:117
+#, python-format
+msgid "User %(username)s is not found"
+msgstr "Пользователь %(username)s не найден"
+
+#: app/routes.py:105
+msgid "You can not follow yourself"
+msgstr "Вы не можете подписаться на себя"
+
+#: app/routes.py:109
+#, python-format
+msgid "Now you are following %(username)s"
+msgstr "Теперь вы подписаны на %(username)s"
+
+#: app/routes.py:120
+msgid "You can not unfollow yourself"
+msgstr "Вы не можете отписаться от себя"
+
+#: app/routes.py:124
+#, python-format
+msgid "Now you are not following %(username)s"
+msgstr "Теперь вы не подписаны на %(username)s"
+
+#: app/routes.py:138 app/templates/base.html:42
+msgid "Explore"
+msgstr "Обзор"
+
+#: app/routes.py:149
+msgid "Check your email for the instructions"
+msgstr "Проверьте свой email для инструкций"
+
+#: app/routes.py:151 app/routes.py:166
+msgid "Reset password"
+msgstr "Сброс пароля"
+
+#: app/routes.py:164
+msgid "Your password has been reset"
+msgstr "Ваш пароль был сброшен"
+
+#: app/templates/404.html:4
+msgid "Resource not found"
+msgstr "Ресурс не найден"
+
+#: app/templates/500.html:4
+msgid "Internal error"
+msgstr "Внутренняя ошибка"
+
+#: app/templates/_nav.html:5
+msgid "Newer"
+msgstr "Новее"
+
+#: app/templates/_nav.html:10
+msgid "Older"
+msgstr "Старее"
+
+#: app/templates/_post.html:14
+#, python-format
+msgid "%(user_link)s said %(when)s:"
+msgstr "%(user_link)s написал %(when)s:"
+
+#: app/templates/base.html:6
+msgid "Welcome to Microblog"
+msgstr "Добро пожаловать в Microblog"
+
+#: app/templates/base.html:38
+msgid "Select option"
+msgstr "Выберите опцию"
+
+#: app/templates/base.html:39
+msgid "Login"
+msgstr "Вход"
+
+#: app/templates/base.html:45
+msgid "Logout"
+msgstr "Выход"
+
+#: app/templates/index.html:8
+#, python-format
+msgid "Hello, %(username)s!"
+msgstr "Привет, %(username)s!"
+
+#: app/templates/login.html:17
+msgid "New user?"
+msgstr "Новичок?"
+
+#: app/templates/login.html:17
+msgid "Register!"
+msgstr "Регистрация!"
+
+#: app/templates/login.html:18
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: app/templates/login.html:18
+msgid "Reset!"
+msgstr "Сбросить!"
+
+#: app/templates/user.html:12
+#, python-format
+msgid "User: %(username)s"
+msgstr "Пользователь: %(username)s"
+
+#: app/templates/user.html:20
+#, python-format
+msgid "Last seen on: %(date)s"
+msgstr "Последний раз был: %(date)s"
+
+#: app/templates/user.html:24
+#, python-format
+msgid "%(followers)d followers, %(followed)d following"
+msgstr "%(followers)d подписчики, %(followed)d подписки"
+
+#: app/templates/user.html:28
+msgid "Edit profile"
+msgstr "Изменить профиль"
+
+#: app/templates/user.html:32
+msgid "Follow this user"
+msgstr "Подписаться"
+
+#: app/templates/user.html:36
+msgid "Unfollow this user"
+msgstr "Отписаться"
+
+#: app/templates/email/reset_password.html:2
+#, python-format
+msgid "Dear %(username)s"
+msgstr "Уважаемый %(username)s"
+
+#: app/templates/email/reset_password.html:5
+msgid "To reset your password"
+msgstr "Для сброса пароля"
+
+#: app/templates/email/reset_password.html:7
+msgid "click here"
+msgstr "нажмите здесь"
+
+#: app/templates/email/reset_password.html:10
+msgid ""
+"Alternatively, you can paste the following link in your browser's address "
+"bar:"
+msgstr "Также вы можете скопировать ссылку нижу в строку браузера:"
+
+#: app/templates/email/reset_password.html:12
+msgid "If you have not requested a password reset simply ignore this message."
+msgstr "Проигнорируйте это письмо, если вы не запрашивали сброс пароля"
+
+#: app/templates/email/reset_password.html:13
+msgid "Sincerely,"
+msgstr "С уважением,"
+
+#: app/templates/email/reset_password.html:14
+msgid "The Microblog Team"
+msgstr "Команда Microblog"
