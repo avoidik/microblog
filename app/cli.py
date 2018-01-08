@@ -24,10 +24,10 @@ def seed(destructive=False):
     db.session.add_all([u1, u2, u3, u4])
 
     now = datetime.utcnow()
-    p1 = Post(body="post from " + u1.username, author=u1, timestamp=now + timedelta(seconds=4))
-    p2 = Post(body="post from " + u2.username, author=u2, timestamp=now + timedelta(seconds=3))
-    p3 = Post(body="post from " + u3.username, author=u3, timestamp=now + timedelta(seconds=2))
-    p4 = Post(body="post from " + u4.username, author=u4, timestamp=now + timedelta(seconds=1))
+    p1 = Post(body="post from " + u1.username, author=u1, timestamp=now + timedelta(seconds=4), language="en")
+    p2 = Post(body="post from " + u2.username, author=u2, timestamp=now + timedelta(seconds=3), language="en")
+    p3 = Post(body="post from " + u3.username, author=u3, timestamp=now + timedelta(seconds=2), language="en")
+    p4 = Post(body="post from " + u4.username, author=u4, timestamp=now + timedelta(seconds=1), language="en")
     db.session.add_all([p1, p2, p3, p4])
     db.session.commit()
 

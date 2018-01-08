@@ -1,11 +1,13 @@
-from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, g, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_babel import _, get_locale
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User, Post
 from app.email import send_password_reset_email
+from app.translate import translate
 from datetime import datetime
+from guess_language import guess_language, UNKNOWN
 
 @app.route("/", methods=["GET", "POST"])
 @app.route("/index", methods=["GET", "POST"])
@@ -13,7 +15,10 @@ from datetime import datetime
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        lang = guess_language(form.post.data)
+        if lang is UNKNOWN or len(lang) > 5:
+            lang = ''
+        post = Post(body=form.post.data, author=current_user, language=lang)
         db.session.add(post)
         db.session.commit()
         flash(_("Post added"))
@@ -164,6 +169,14 @@ def reset_password(token):
         flash(_("Your password has been reset"))
         return redirect(url_for("login"))
     return render_template("reset_password.html", title=_("Reset password"), form=form)
+
+@app.route("/translate", methods=["POST"])
+@login_required
+def translate_text():
+    return jsonify({'text': translate(request.form['text'],
+                                      request.form['source_lang'],
+                                      request.form['dest_lang']
+                                     )})
 
 @app.before_request
 def before_request():
