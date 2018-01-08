@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
-from app import app, db
-from werkzeug.security import check_password_hash, generate_password_hash
+from app import db, login
+from flask import current_app
 from flask_login import UserMixin
-from app import login
+from werkzeug.security import check_password_hash, generate_password_hash
 from hashlib import md5
 import jwt
 
@@ -75,7 +75,7 @@ class User(UserMixin, db.Model):
     def get_reset_password_token(self, expires_in=600):
         token = jwt.encode(
             {'reset_password': self.id, 'exp': datetime.utcnow() + timedelta(minutes=10), 'iat': datetime.utcnow()},
-            app.config['SECRET_KEY'],
+            current_app.config['SECRET_KEY'],
             algorithm='HS256'
         )
         return token.decode("utf-8")
@@ -84,7 +84,7 @@ class User(UserMixin, db.Model):
     def verify_reset_password_token(token):
         result = None
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
             result = User.query.get(data['reset_password'])
         except jwt.ExpiredSignatureError:
             pass
