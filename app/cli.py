@@ -68,6 +68,8 @@ def register(app):
         u3.follow(u4) # mary follows david
         db.session.commit()
 
+        Post.reindex()
+
     @app.template_filter("show_all_attrs")
     def show_all_attrs(value):
         res = []
