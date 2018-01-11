@@ -1,6 +1,8 @@
 import os
+from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, ".env"))
 
 class Config(object):
     SECRET_KEY = os.environ.get("SECRET_KEY") or "REALLY_SECRET_KEY"
@@ -15,3 +17,4 @@ class Config(object):
     POSTS_PER_PAGE = 15
     LANGUAGES = ['en', 'ru']
     MS_TRANSLATOR_KEY = os.environ.get("MS_TRANSLATOR_KEY")
+    ELASTICSEARCH_URL = os.environ.get("ELASTICSEARCH_URL")

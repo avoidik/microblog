@@ -1,13 +1,13 @@
 <table class="table table-hover table-posts">
     <tr>
-        <td width="70px">
-            <a href="{{ url_for('user', username=post.author.username) }}">
+        <td width="36px">
+            <a href="{{ url_for('main.user', username=post.author.username) }}">
                 <img src="{{ post.author.avatar(36) }}">
             </a>
         </td>
         <td>
             {% set user_link %}
-            <a href="{{ url_for('user', username=post.author.username) }}">
+            <a href="{{ url_for('main.user', username=post.author.username) }}">
                 {{ post.author.username }}
             </a>
             {% endset %}
@@ -18,6 +18,7 @@
             <br>
             <span id="translation{{ post.id }}">
                 <a href="#" onclick="translate(
+                            event,
                             '#post{{ post.id }}',
                             '#translation{{ post.id }}',
                             '{{ post.language }}',

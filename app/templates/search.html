@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>{{ _("Search results") }}</h1>
+    {% for post in posts %}
+        {% include 'main/_post.html' %}
+    {% endfor %}
+    {% include 'main/_nav.html' %}
+{% endblock %}
