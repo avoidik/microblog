@@ -3,3 +3,4 @@ __pycache__/
 venv/
 app/logs/
 app.db
+.vagrant/
