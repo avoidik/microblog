@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: microblog\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-08 13:26+0200\n"
-"PO-Revision-Date: 2018-01-08 13:28+0200\n"
+"POT-Creation-Date: 2018-01-11 15:01+0200\n"
+"PO-Revision-Date: 2018-01-11 15:01+0200\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -20,203 +20,13 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 2.0.5\n"
 
-#: app/__init__.py:20
+#: app/__init__.py:19
 msgid "Please log in to access this page."
 msgstr "Войдите для доступа к этой странице."
 
-#: app/__init__.py:38
+#: app/__init__.py:61
 msgid "Microblog Error Report"
 msgstr "Отчет об ошибках Microblog"
-
-#: app/email.py:19
-msgid "Reset your password"
-msgstr "Сбросить пароль"
-
-#: app/forms.py:8 app/forms.py:20 app/forms.py:51
-msgid "Username"
-msgstr "Пользователь"
-
-#: app/forms.py:9
-msgid "Username can not be empty"
-msgstr "Имя пользователя не может быть пустым"
-
-#: app/forms.py:10 app/forms.py:22 app/forms.py:53
-msgid "Username length between 3 and 32"
-msgstr "Длина имени пользователя от 3 до 32"
-
-#: app/forms.py:12 app/forms.py:29 app/forms.py:86
-msgid "Password"
-msgstr "Пароль"
-
-#: app/forms.py:13
-msgid "Password can not be empty"
-msgstr "Пароль не может быть пустым"
-
-#: app/forms.py:14
-msgid "Password length between 3 and 32"
-msgstr "Длина пароля от 3 до 32"
-
-#: app/forms.py:16
-msgid "Remember Me"
-msgstr "Запомнить"
-
-#: app/forms.py:17 app/routes.py:52 app/templates/login.html:6
-msgid "Sign In"
-msgstr "Вход"
-
-#: app/forms.py:21 app/forms.py:52
-msgid "Username required"
-msgstr "Требуется имя пользователя"
-
-#: app/forms.py:24 app/forms.py:78
-msgid "Email"
-msgstr "Email"
-
-#: app/forms.py:25 app/forms.py:79
-msgid "Email required"
-msgstr "Требуется email"
-
-#: app/forms.py:26 app/forms.py:80
-msgid "Email length between 3 and 64"
-msgstr "Длина email от 3 до 64"
-
-#: app/forms.py:27 app/forms.py:81
-msgid "Email is invalid"
-msgstr "Некорректный email"
-
-#: app/forms.py:30 app/forms.py:87
-msgid "Password required"
-msgstr "Требуется пароль"
-
-#: app/forms.py:31 app/forms.py:88
-msgid "Password length between 3 and 64"
-msgstr "Длина пароля от 3 до 64"
-
-#: app/forms.py:33 app/forms.py:90
-msgid "Repeat password"
-msgstr "Повтор пароля"
-
-#: app/forms.py:34 app/forms.py:91
-msgid "Password repeat required"
-msgstr "Требуется повтор пароля"
-
-#: app/forms.py:35 app/forms.py:92
-msgid "Password repeat length between 3 and 64"
-msgstr "Длина повтора пароля от 3 до 64"
-
-#: app/forms.py:36 app/forms.py:93
-msgid "Passwords doesn't match"
-msgstr "Пароли не совпадают"
-
-#: app/forms.py:38 app/routes.py:71 app/templates/base.html:57
-#: app/templates/register.html:5
-msgid "Register"
-msgstr "Регистрация"
-
-#: app/forms.py:43
-msgid "Username already exist"
-msgstr "Пользователь существует"
-
-#: app/forms.py:48
-msgid "Email already taken"
-msgstr "Email уже существует"
-
-#: app/forms.py:55
-msgid "About me"
-msgstr "О себе"
-
-#: app/forms.py:58 app/forms.py:75 app/forms.py:95
-msgid "Submit"
-msgstr "Отправить"
-
-#: app/forms.py:68
-#, python-format
-msgid "Such username is taken %(username)s!"
-msgstr "Пользователь %(username)s уже существует!"
-
-#: app/forms.py:71
-msgid "Post"
-msgstr "Пост"
-
-#: app/forms.py:72
-msgid "Post text required"
-msgstr "Требуется текст для отправки"
-
-#: app/forms.py:73
-msgid "Post text length betweetn 5 and 140"
-msgstr "Длина текста для отправки между 5 и 140"
-
-#: app/forms.py:83 app/templates/reset_password.html:6
-#: app/templates/reset_password_request.html:6
-msgid "Reset"
-msgstr "Сброс"
-
-#: app/routes.py:24
-msgid "Post added"
-msgstr "Запись добавлена"
-
-#: app/routes.py:34 app/templates/base.html:50
-msgid "Home"
-msgstr "Главная"
-
-#: app/routes.py:45
-msgid "Invalid username or password"
-msgstr "Некорректный пользователь или пароль"
-
-#: app/routes.py:69
-msgid "Congratulations! You are registered user!"
-msgstr "Поздравляем! Вы зарегистрированы!"
-
-#: app/routes.py:84 app/templates/base.html:52 app/templates/base.html:60
-msgid "Profile"
-msgstr "Профиль"
-
-#: app/routes.py:95
-msgid "Changes have been saved!"
-msgstr "Изменения сохранены!"
-
-#: app/routes.py:100 app/templates/edit_profile.html:6
-msgid "Edit Profile"
-msgstr "Изменить профиль"
-
-#: app/routes.py:107 app/routes.py:122
-#, python-format
-msgid "User %(username)s is not found"
-msgstr "Пользователь %(username)s не найден"
-
-#: app/routes.py:110
-msgid "You can not follow yourself"
-msgstr "Вы не можете подписаться на себя"
-
-#: app/routes.py:114
-#, python-format
-msgid "Now you are following %(username)s"
-msgstr "Теперь вы подписаны на %(username)s"
-
-#: app/routes.py:125
-msgid "You can not unfollow yourself"
-msgstr "Вы не можете отписаться от себя"
-
-#: app/routes.py:129
-#, python-format
-msgid "Now you are not following %(username)s"
-msgstr "Теперь вы не подписаны на %(username)s"
-
-#: app/routes.py:143 app/templates/base.html:59
-msgid "Explore"
-msgstr "Обзор"
-
-#: app/routes.py:154
-msgid "Check your email for the instructions"
-msgstr "Проверьте свой email для инструкций"
-
-#: app/routes.py:156 app/routes.py:171
-msgid "Reset password"
-msgstr "Сброс пароля"
-
-#: app/routes.py:169
-msgid "Your password has been reset"
-msgstr "Ваш пароль был сброшен"
 
 #: app/translate.py:8
 msgid "Error: translation service is not configured."
@@ -226,98 +36,243 @@ msgstr "Ошибка: сервис перевода не настроен."
 msgid "Error: translation service has failed."
 msgstr "Ошибка: сервис перевода не работает."
 
-#: app/templates/404.html:4
-msgid "Resource not found"
-msgstr "Ресурс не найден"
+#: app/auth/email.py:7
+msgid "Reset your password"
+msgstr "Сбросить пароль"
 
-#: app/templates/500.html:4
-msgid "Internal error"
-msgstr "Внутренняя ошибка"
+#: app/auth/forms.py:8 app/auth/forms.py:20 app/main/forms.py:9
+msgid "Username"
+msgstr "Пользователь"
 
-#: app/templates/_nav.html:5
-msgid "Newer"
-msgstr "Новее"
+#: app/auth/forms.py:9
+msgid "Username can not be empty"
+msgstr "Имя пользователя не может быть пустым"
 
-#: app/templates/_nav.html:10
-msgid "Older"
-msgstr "Старее"
+#: app/auth/forms.py:10 app/auth/forms.py:22 app/main/forms.py:11
+msgid "Username length between 3 and 32"
+msgstr "Длина имени пользователя от 3 до 32"
 
-#: app/templates/_post.html:14
+#: app/auth/forms.py:12 app/auth/forms.py:29 app/auth/forms.py:59
+msgid "Password"
+msgstr "Пароль"
+
+#: app/auth/forms.py:13
+msgid "Password can not be empty"
+msgstr "Пароль не может быть пустым"
+
+#: app/auth/forms.py:14
+msgid "Password length between 3 and 32"
+msgstr "Длина пароля от 3 до 32"
+
+#: app/auth/forms.py:16
+msgid "Remember Me"
+msgstr "Запомнить"
+
+#: app/auth/forms.py:17 app/auth/routes.py:25 app/templates/auth/login.html:6
+msgid "Sign In"
+msgstr "Вход"
+
+#: app/auth/forms.py:21 app/main/forms.py:10
+msgid "Username required"
+msgstr "Требуется имя пользователя"
+
+#: app/auth/forms.py:24 app/auth/forms.py:51
+msgid "Email"
+msgstr "Email"
+
+#: app/auth/forms.py:25 app/auth/forms.py:52
+msgid "Email required"
+msgstr "Требуется email"
+
+#: app/auth/forms.py:26 app/auth/forms.py:53
+msgid "Email length between 3 and 64"
+msgstr "Длина email от 3 до 64"
+
+#: app/auth/forms.py:27 app/auth/forms.py:54
+msgid "Email is invalid"
+msgstr "Некорректный email"
+
+#: app/auth/forms.py:30 app/auth/forms.py:60
+msgid "Password required"
+msgstr "Требуется пароль"
+
+#: app/auth/forms.py:31 app/auth/forms.py:61
+msgid "Password length between 3 and 64"
+msgstr "Длина пароля от 3 до 64"
+
+#: app/auth/forms.py:33 app/auth/forms.py:63
+msgid "Repeat password"
+msgstr "Повтор пароля"
+
+#: app/auth/forms.py:34 app/auth/forms.py:64
+msgid "Password repeat required"
+msgstr "Требуется повтор пароля"
+
+#: app/auth/forms.py:35 app/auth/forms.py:65
+msgid "Password repeat length between 3 and 64"
+msgstr "Длина повтора пароля от 3 до 64"
+
+#: app/auth/forms.py:36 app/auth/forms.py:66
+msgid "Passwords doesn't match"
+msgstr "Пароли не совпадают"
+
+#: app/auth/forms.py:38 app/auth/routes.py:44
+#: app/templates/auth/register.html:5 app/templates/base.html:58
+msgid "Register"
+msgstr "Регистрация"
+
+#: app/auth/forms.py:43
+msgid "Username already exist"
+msgstr "Пользователь существует"
+
+#: app/auth/forms.py:48
+msgid "Email already taken"
+msgstr "Email уже существует"
+
+#: app/auth/forms.py:56 app/templates/auth/reset_password.html:6
+#: app/templates/auth/reset_password_request.html:6
+msgid "Reset"
+msgstr "Сброс"
+
+#: app/auth/forms.py:68 app/main/forms.py:16 app/main/forms.py:33
+msgid "Submit"
+msgstr "Отправить"
+
+#: app/auth/routes.py:18
+msgid "Invalid username or password"
+msgstr "Некорректный пользователь или пароль"
+
+#: app/auth/routes.py:42
+msgid "Congratulations! You are registered user!"
+msgstr "Поздравляем! Вы зарегистрированы!"
+
+#: app/auth/routes.py:55
+msgid "Check your email for the instructions"
+msgstr "Проверьте свой email для инструкций"
+
+#: app/auth/routes.py:57 app/auth/routes.py:72
+msgid "Reset password"
+msgstr "Сброс пароля"
+
+#: app/auth/routes.py:70
+msgid "Your password has been reset"
+msgstr "Ваш пароль был сброшен"
+
+#: app/main/forms.py:13
+msgid "About me"
+msgstr "О себе"
+
+#: app/main/forms.py:26
 #, python-format
-msgid "%(user_link)s said %(when)s:"
-msgstr "%(user_link)s написал %(when)s:"
+msgid "Such username is taken %(username)s!"
+msgstr "Пользователь %(username)s уже существует!"
 
-#: app/templates/_post.html:24
-msgid "Translate this post"
-msgstr "Перевести эту запись"
+#: app/main/forms.py:29
+msgid "Post"
+msgstr "Пост"
+
+#: app/main/forms.py:30
+msgid "Post text required"
+msgstr "Требуется текст для отправки"
+
+#: app/main/forms.py:31
+msgid "Post text length betweetn 5 and 140"
+msgstr "Длина текста для отправки между 5 и 140"
+
+#: app/main/forms.py:36 app/main/routes.py:34
+msgid "Search"
+msgstr "Поиск"
+
+#: app/main/forms.py:37
+msgid "Search query required"
+msgstr "Требуется поисковой запрос"
+
+#: app/main/routes.py:48
+msgid "Post added"
+msgstr "Запись добавлена"
+
+#: app/main/routes.py:58 app/templates/base.html:51
+msgid "Home"
+msgstr "Главная"
+
+#: app/main/routes.py:72 app/templates/base.html:53 app/templates/base.html:61
+msgid "Profile"
+msgstr "Профиль"
+
+#: app/main/routes.py:83
+msgid "Changes have been saved!"
+msgstr "Изменения сохранены!"
+
+#: app/main/routes.py:88 app/templates/main/edit_profile.html:6
+msgid "Edit Profile"
+msgstr "Изменить профиль"
+
+#: app/main/routes.py:95 app/main/routes.py:110
+#, python-format
+msgid "User %(username)s is not found"
+msgstr "Пользователь %(username)s не найден"
+
+#: app/main/routes.py:98
+msgid "You can not follow yourself"
+msgstr "Вы не можете подписаться на себя"
+
+#: app/main/routes.py:102
+#, python-format
+msgid "Now you are following %(username)s"
+msgstr "Теперь вы подписаны на %(username)s"
+
+#: app/main/routes.py:113
+msgid "You can not unfollow yourself"
+msgstr "Вы не можете отписаться от себя"
+
+#: app/main/routes.py:117
+#, python-format
+msgid "Now you are not following %(username)s"
+msgstr "Теперь вы не подписаны на %(username)s"
+
+#: app/main/routes.py:131 app/templates/base.html:60
+msgid "Explore"
+msgstr "Обзор"
 
 #: app/templates/base.html:6
 msgid "Welcome to Microblog"
 msgstr "Добро пожаловать в Microblog"
 
-#: app/templates/base.html:28
+#: app/templates/base.html:29
 msgid "Error: could not contact server."
 msgstr "Ошибка: не удалось связаться с сервисом перевода."
 
-#: app/templates/base.html:55
+#: app/templates/base.html:56
 msgid "Select option"
 msgstr "Выберите опцию"
 
-#: app/templates/base.html:56
+#: app/templates/base.html:57
 msgid "Login"
 msgstr "Вход"
 
-#: app/templates/base.html:62
+#: app/templates/base.html:63
 msgid "Logout"
 msgstr "Выход"
 
-#: app/templates/index.html:8
-#, python-format
-msgid "Hello, %(username)s!"
-msgstr "Привет, %(username)s!"
+#: app/templates/search.html:4
+msgid "Search results"
+msgstr "Результаты поиска"
 
-#: app/templates/login.html:17
+#: app/templates/auth/login.html:17
 msgid "New user?"
 msgstr "Новичок?"
 
-#: app/templates/login.html:17
+#: app/templates/auth/login.html:17
 msgid "Register!"
 msgstr "Регистрация!"
 
-#: app/templates/login.html:18
+#: app/templates/auth/login.html:18
 msgid "Forgot password?"
 msgstr "Забыли пароль?"
 
-#: app/templates/login.html:18
+#: app/templates/auth/login.html:18
 msgid "Reset!"
 msgstr "Сбросить!"
-
-#: app/templates/user.html:12
-#, python-format
-msgid "User: %(username)s"
-msgstr "Пользователь: %(username)s"
-
-#: app/templates/user.html:20
-#, python-format
-msgid "Last seen on: %(date)s"
-msgstr "Последний раз был: %(date)s"
-
-#: app/templates/user.html:24
-#, python-format
-msgid "%(followers)d followers, %(followed)d following"
-msgstr "%(followers)d подписчики, %(followed)d подписки"
-
-#: app/templates/user.html:28
-msgid "Edit profile"
-msgstr "Изменить профиль"
-
-#: app/templates/user.html:32
-msgid "Follow this user"
-msgstr "Подписаться"
-
-#: app/templates/user.html:36
-msgid "Unfollow this user"
-msgstr "Отписаться"
 
 #: app/templates/email/reset_password.html:2
 #, python-format
@@ -349,3 +304,60 @@ msgstr "С уважением,"
 #: app/templates/email/reset_password.html:14
 msgid "The Microblog Team"
 msgstr "Команда Microblog"
+
+#: app/templates/errors/404.html:4
+msgid "Resource not found"
+msgstr "Ресурс не найден"
+
+#: app/templates/errors/500.html:4
+msgid "Internal error"
+msgstr "Внутренняя ошибка"
+
+#: app/templates/main/_nav.html:5
+msgid "Newer"
+msgstr "Новее"
+
+#: app/templates/main/_nav.html:10
+msgid "Older"
+msgstr "Старее"
+
+#: app/templates/main/_post.html:14
+#, python-format
+msgid "%(user_link)s said %(when)s:"
+msgstr "%(user_link)s написал %(when)s:"
+
+#: app/templates/main/_post.html:25
+msgid "Translate this post"
+msgstr "Перевести эту запись"
+
+#: app/templates/main/index.html:8
+#, python-format
+msgid "Hello, %(username)s!"
+msgstr "Привет, %(username)s!"
+
+#: app/templates/main/user.html:12
+#, python-format
+msgid "User: %(username)s"
+msgstr "Пользователь: %(username)s"
+
+#: app/templates/main/user.html:20
+#, python-format
+msgid "Last seen on: %(date)s"
+msgstr "Последний раз был: %(date)s"
+
+#: app/templates/main/user.html:24
+#, python-format
+msgid "%(followers)d followers, %(followed)d following"
+msgstr "%(followers)d подписчики, %(followed)d подписки"
+
+#: app/templates/main/user.html:28
+msgid "Edit profile"
+msgstr "Изменить профиль"
+
+#: app/templates/main/user.html:32
+msgid "Follow this user"
+msgstr "Подписаться"
+
+#: app/templates/main/user.html:36
+msgid "Unfollow this user"
+msgstr "Отписаться"

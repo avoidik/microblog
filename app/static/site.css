@@ -6,3 +6,15 @@ body { padding-top: 70px; }
 .table.table-posts {
     margin-bottom: 0;
 }
+
+.table.table-user > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table.table-user > tbody > tr > td:first-child {
+    width: 128px;
+}
+
+.table.table-posts > tbody > tr > td {
+    vertical-align: middle;
+}
