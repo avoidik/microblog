@@ -43,7 +43,7 @@ def index():
     if form.validate_on_submit():
         lang = guess_language(form.post.data)
         if lang is UNKNOWN or len(lang) > 5:
-            lang = ''
+            lang = current_app.config['LANGUAGES'][0]
         post = Post(body=form.post.data, author=current_user, language=lang)
         db.session.add(post)
         db.session.commit()
