@@ -27,7 +27,7 @@ def query_index(index, query, page, per_page):
             },
             'from': (page - 1) * per_page,
             'size': per_page,
-            'lenient': true
+            'lenient': 'true'
         }
     )
     hits = search['hits']
