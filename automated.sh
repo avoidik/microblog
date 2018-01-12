@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+echo "en_US.UTF-8 UTF-8" > /var/lib/locales/supported.d/en
+DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure locales
+
 sed -i "s/[#]*PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 sed -i "s/UsePAM yes/UsePAM no/g" /etc/ssh/sshd_config
 service ssh restart
