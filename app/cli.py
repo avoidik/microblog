@@ -44,6 +44,10 @@ def register(app):
             db.drop_all()
             db.create_all()
 
+        if User.query.filter_by(username='john').first():
+            app.logger.info("Seeding has been skipped")
+            return
+
         u1 = User(username='john', email='john@sample.com')
         u2 = User(username='susan', email='susan@sample.com')
         u3 = User(username='mary', email='mary@sample.com')
