@@ -33,7 +33,6 @@ python3 -m venv venv
 source venv/bin/activate
 pip3 install -U pip setuptools wheel
 pip3 install -r requirements.txt
-pip3 install gunicorn pymysql
 
 SECRET_KEY=$(python3 -c "import uuid; print(uuid.uuid4().hex)")
 DB_PASS=$(python3 -c "import uuid; print(uuid.uuid4().hex)")

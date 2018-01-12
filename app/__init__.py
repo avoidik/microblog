@@ -71,18 +71,23 @@ def create_app(config_class=Config):
 
         logsdir = os.path.join(os.path.abspath(os.path.dirname(__file__)), "logs/")
 
-        if not os.path.exists(logsdir):
-            os.mkdir(logsdir)
-        file_handler = RotatingFileHandler(
-            filename=os.path.join(logsdir, "microblog.log"),
-            maxBytes=10240,
-            backupCount=3
-        )
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-        ))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
+        if app.config['LOG_TO_STDOUT']:
+            stream_handler = logging.StreamHandler()
+            stream_handler.setLevel(logging.INFO)
+            app.logger.addHandler(stream_handler)
+        else:
+            if not os.path.exists(logsdir):
+                os.mkdir(logsdir)
+            file_handler = RotatingFileHandler(
+                filename=os.path.join(logsdir, "microblog.log"),
+                maxBytes=10240,
+                backupCount=3
+            )
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+            ))
+            file_handler.setLevel(logging.INFO)
+            app.logger.addHandler(file_handler)
 
         app.logger.setLevel(logging.INFO)
         app.logger.info("Microblog started up")

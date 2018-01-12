@@ -12,3 +12,6 @@ guess-language_spirit
 requests
 python-dotenv
 elasticsearch
+gunicorn
+pymysql
+psycopg2
