@@ -42,6 +42,14 @@ vagrant up
 ```
 http://192.168.33.10/
 ```
+There are four built-in users:
+```
+john
+susan
+mary
+david
+```
+The password is the same as the login.
 3. Destroy
 ```
 vagrant destroy -f
