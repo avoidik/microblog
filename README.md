@@ -50,6 +50,7 @@ mary
 david
 ```
 The password is the same as the login.
+
 3. Destroy
 ```
 vagrant destroy -f
