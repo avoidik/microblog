@@ -1,0 +1,1 @@
+web: flask translate compile; flask db upgrade; flask seed --no-destructive; gunicorn microblog:app

@@ -57,3 +57,16 @@ The password is the same as the login.
 ```
 vagrant destroy -f
 ```
+## Heroku
+```
+git clone ...
+heroku login
+heroku apps:create flask-microblog
+git remote -v
+heroku addons:add heroku-postgresql:hobby-dev
+heroku config:set LOG_TO_STDOUT=1
+heroku addons:create searchbox:starter
+heroku config:get SEARCHBOX_URL
+heroku config:set ELASTICSEARCH_URL=...
+heroku config:set FLASK_APP=microblog.py
+```
