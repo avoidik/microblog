@@ -8,6 +8,8 @@ Improvements here are following:
 - Additional errors handler
 - Few custom helpers for Views and Controllers
 - Complete Vagrant configuration
+- Additional database constraints
+- Additional tests
 
 ## Run smtp daemon
 ```
