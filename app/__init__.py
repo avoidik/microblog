@@ -37,8 +37,12 @@ def create_app(config_class=Config):
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
             if app.config['ELASTICSEARCH_URL'] else None
 
-    from app.errors import bp as errors_bp
-    app.register_blueprint(errors_bp)
+    if app.config['ERROR_HANDLER'] and app.config['ERROR_HANDLER'] == "simple":
+        from app.errors import simple as errors_handler
+        errors_handler.set_error_handler(app)
+    else:
+        from app.errors import bp as errors_bp
+        app.register_blueprint(errors_bp)
 
     from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')

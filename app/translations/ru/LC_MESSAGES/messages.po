@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: microblog\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-11 15:01+0200\n"
-"PO-Revision-Date: 2018-01-11 15:01+0200\n"
+"POT-Creation-Date: 2018-01-12 11:38+0200\n"
+"PO-Revision-Date: 2018-01-12 11:39+0200\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -24,9 +24,14 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "Войдите для доступа к этой странице."
 
-#: app/__init__.py:61
+#: app/__init__.py:64
 msgid "Microblog Error Report"
 msgstr "Отчет об ошибках Microblog"
+
+#: app/helpers.py:8
+#, python-format
+msgid "Error in the %(field)s field - %(msg)s"
+msgstr "Ошибка в поле %(field)s - %(msg)s"
 
 #: app/translate.py:8
 msgid "Error: translation service is not configured."
@@ -179,7 +184,7 @@ msgstr "Требуется текст для отправки"
 msgid "Post text length betweetn 5 and 140"
 msgstr "Длина текста для отправки между 5 и 140"
 
-#: app/main/forms.py:36 app/main/routes.py:34
+#: app/main/forms.py:36 app/main/routes.py:36
 msgid "Search"
 msgstr "Поиск"
 
@@ -187,50 +192,50 @@ msgstr "Поиск"
 msgid "Search query required"
 msgstr "Требуется поисковой запрос"
 
-#: app/main/routes.py:48
+#: app/main/routes.py:50
 msgid "Post added"
 msgstr "Запись добавлена"
 
-#: app/main/routes.py:58 app/templates/base.html:51
+#: app/main/routes.py:60 app/templates/base.html:51
 msgid "Home"
 msgstr "Главная"
 
-#: app/main/routes.py:72 app/templates/base.html:53 app/templates/base.html:61
+#: app/main/routes.py:76 app/templates/base.html:53 app/templates/base.html:61
 msgid "Profile"
 msgstr "Профиль"
 
-#: app/main/routes.py:83
+#: app/main/routes.py:87
 msgid "Changes have been saved!"
 msgstr "Изменения сохранены!"
 
-#: app/main/routes.py:88 app/templates/main/edit_profile.html:6
+#: app/main/routes.py:92 app/templates/main/edit_profile.html:6
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: app/main/routes.py:95 app/main/routes.py:110
+#: app/main/routes.py:99 app/main/routes.py:114
 #, python-format
 msgid "User %(username)s is not found"
 msgstr "Пользователь %(username)s не найден"
 
-#: app/main/routes.py:98
+#: app/main/routes.py:102
 msgid "You can not follow yourself"
 msgstr "Вы не можете подписаться на себя"
 
-#: app/main/routes.py:102
+#: app/main/routes.py:106
 #, python-format
 msgid "Now you are following %(username)s"
 msgstr "Теперь вы подписаны на %(username)s"
 
-#: app/main/routes.py:113
+#: app/main/routes.py:117
 msgid "You can not unfollow yourself"
 msgstr "Вы не можете отписаться от себя"
 
-#: app/main/routes.py:117
+#: app/main/routes.py:121
 #, python-format
 msgid "Now you are not following %(username)s"
 msgstr "Теперь вы не подписаны на %(username)s"
 
-#: app/main/routes.py:131 app/templates/base.html:60
+#: app/main/routes.py:135 app/templates/base.html:60
 msgid "Explore"
 msgstr "Обзор"
 
@@ -312,6 +317,18 @@ msgstr "Ресурс не найден"
 #: app/templates/errors/500.html:4
 msgid "Internal error"
 msgstr "Внутренняя ошибка"
+
+#: app/templates/errors/generic.html:4
+msgid "Internal server error"
+msgstr "Внутренняя ошибка сервера"
+
+#: app/templates/errors/generic.html:7
+msgid "Exception:"
+msgstr "Исключение:"
+
+#: app/templates/errors/generic.html:8
+msgid "Description:"
+msgstr "Описание:"
 
 #: app/templates/main/_nav.html:5
 msgid "Newer"

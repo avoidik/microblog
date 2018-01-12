@@ -4,13 +4,8 @@
     <h1>{{ _("Internal server error") }}</h1>
     {% if code %}
     <div class="well">
-        <p>Problematic module: {{ where }}</p>
-        <p>Error code: {{ code }}</p>
-    </div>
-    {% endif %}
-    {% if msg %}
-    <div class="well">
-        {{ msg }}
+        <p><strong>{{_("Exception:")}}</strong><br>{{ where }} ({{ code }})</p>
+        <p><strong>{{_("Description:")}}</strong><br>{{ msg }}</p>
     </div>
     {% endif %}
     <p><a href="{{ url_for('main.index') }}">Back to home</a></p>
