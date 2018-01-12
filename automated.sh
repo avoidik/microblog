@@ -67,7 +67,7 @@ ufw status
 export FLASK_APP="microblog.py"
 flask translate compile
 flask db upgrade
-echo "n" | flask seed
+flask seed --no-destructive
 
 chown -R vagrant:vagrant /opt/microblog
 

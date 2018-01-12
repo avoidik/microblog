@@ -36,8 +36,8 @@ def register(app):
         os.remove("messages.pot")
 
     @app.cli.command()
-    @click.option('--destructive', is_flag=True, default=False, help='Recreate DB from scratch.', prompt="Drop database?")
-    def seed(destructive=False):
+    @click.option('--destructive/--no-destructive', default=False, help='Recreate DB from scratch.')
+    def seed(destructive):
         '''Overwrites database with the sample data.'''
 
         if destructive:
