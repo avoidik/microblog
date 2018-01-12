@@ -8,6 +8,7 @@ from app.main.forms import EditProfileForm, PostForm, SearchForm
 from app.models import User, Post
 from app.translate import translate
 from app.main import bp
+from app.helpers import flash_all_errors
 
 @bp.before_app_request
 def before_request():
@@ -24,8 +25,7 @@ def search():
     if not form:
         return redirect(url_for("main.explore"))
     if not form.validate():
-        if len(form.q.errors) > 0:
-            flash(form.q.errors[0])
+        flash_all_errors(form)
         return redirect(url_for("main.explore"))
     page = request.args.get('page', 1, type=int)
     posts, total = Post.search(form.q.data, page, current_app.config["POSTS_PER_PAGE"])
@@ -57,8 +57,10 @@ def index():
                     if posts.has_prev else None
         next_url = url_for("main.index", page=posts.next_num) \
                     if posts.has_next else None
-    return render_template("main/index.html", title=_("Home"),
+        return render_template("main/index.html", title=_("Home"),
                             form=form, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    flash_all_errors(form)
+    return redirect(url_for("main.index"))
 
 @bp.route("/user/<username>")
 @login_required

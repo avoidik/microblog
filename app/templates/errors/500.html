@@ -3,4 +3,9 @@
 {% block app_content %}
     <h1>{{ _("Internal error") }}</h1>
     <p><a href="{{ url_for('main.index') }}">Back to home</a></p>
+    {% if error %}
+    <div class="well">
+        {{ error|show_all_attrs }}
+    </div>
+    {% endif %}
 {% endblock %}
