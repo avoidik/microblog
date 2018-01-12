@@ -6,12 +6,12 @@ hosts = [
 ]
 
 Vagrant.configure(VAGRANT_VERSION) do |config|
-	config.vm.box = VM_BOX
+    config.vm.box = VM_BOX
     config.ssh.insert_key = false
 
-	config.vm.provider "virtualbox" do |vb|
-		vb.check_guest_additions = false
-		vb.functional_vboxsf = false
+    config.vm.provider "virtualbox" do |vb|
+        vb.check_guest_additions = false
+        vb.functional_vboxsf = false
     end
 
     hosts.each_with_index do |elem, index|
@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANT_VERSION) do |config|
             machine.vm.hostname = elem[:name]
             machine.vm.provider "virtualbox" do |v|
                 v.name = elem[:name]
-				v.customize ["modifyvm", :id, "--memory", 1024]
+                v.customize ["modifyvm", :id, "--memory", 1024]
             end
             machine.vm.provision :shell, keep_color: true, path: "automated.sh"
         end
