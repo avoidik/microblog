@@ -5,6 +5,7 @@
 venv\scripts\activate
 export MAIL_SERVER=localhost
 export MAIL_PORT=8025
+...
 python -m smtpd -n -c DebuggingServer localhost:8025
 ```
 ## Gmail account
@@ -22,4 +23,17 @@ pybabel extract -F babel.cfg -k _l -o messages.pot .
 pybabel init -i messages.pot -d app/translations -l ru
 pybabel compile -d app/translations
 pybabel update -i messages.pot -d app/translations
+```
+## Vagrant
+1. Start
+```
+vagrant up
+```
+2. Play (accept self-signed certificate)
+```
+http://192.168.33.10/
+```
+3. Destroy
+```
+vagrant destroy -f
 ```
