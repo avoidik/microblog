@@ -1,5 +1,14 @@
 # Microblog
 
+Based on [tutorial](https://learn.miguelgrinberg.com)
+
+Improvements here are following:
+- Seeding database via flask CLI
+- Different query for followed_posts()
+- Additional errors handler
+- Few custom helpers for Views and Controllers
+- Complete Vagrant configuration
+
 ## Run smtp daemon
 ```
 venv\scripts\activate
