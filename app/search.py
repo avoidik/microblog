@@ -22,12 +22,12 @@ def query_index(index, query, page, per_page):
             'query': {
                 'multi_match': {
                     'query': query,
-                    'fields': ['*']
+                    'fields': ['*'],
+                    'lenient': 'true'
                 }
             },
             'from': (page - 1) * per_page,
-            'size': per_page,
-            'lenient': 'true'
+            'size': per_page
         }
     )
     hits = search['hits']
