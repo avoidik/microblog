@@ -70,3 +70,21 @@ heroku config:get SEARCHBOX_URL
 heroku config:set ELASTICSEARCH_URL=...
 heroku config:set FLASK_APP=microblog.py
 ```
+## Docker
+```
+docker-machine create microblog
+docker-machine env microblog
+docker build -t microblog:latest .
+docker run --name microblog -d -p 8000:5000 --rm \
+    -e SECRET_KEY=my-secret-key \
+    -e MAIL_SERVER=smtp.googlemail.com \
+    -e MAIL_PORT=587 \
+    -e MAIL_USE_TLS=true \
+    -e MAIL_USERNAME=<your-gmail-username> \
+    -e MAIL_PASSWORD=<your-gmail-password> \
+    microblog:latest
+docker stop microblog
+docker rmi microblog
+docker-machine kill microblog
+docker-machine env -u
+```
