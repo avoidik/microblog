@@ -10,6 +10,7 @@ Improvements here are following:
 - Complete Vagrant configuration
 - Additional database constraints
 - Additional tests
+- Complete docker-compose infrastructure
 
 ## Run smtp daemon
 ```
@@ -87,4 +88,21 @@ docker stop microblog
 docker rmi microblog
 docker-machine kill microblog
 docker-machine env -u
+```
+## Docker compose
+Create infrastructure
+```
+scripts/create-machine.sh
+scripts/create-network.sh
+scripts/up-compose.sh docker-compose.yml
+```
+Destroy infrastructure (soft)
+```
+scripts/prune.sh
+scripts/down-compose.sh docker-compose.yml
+scripts/kill-machine.sh
+```
+Destroy infrastructure (hard)
+```
+scripts/kill-machine.sh
 ```

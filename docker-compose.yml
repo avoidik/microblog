@@ -1,0 +1,64 @@
+version: '2.1'
+networks:
+  microblog:
+    external:
+      name: "${ENV_NETWORK}"
+volumes:
+  microblog-mysql-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+  microblog-app-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+  microblog-es-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+services:
+  microblog-mysql:
+    image: mysql:5.7
+    restart: always
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
+    networks:
+      - microblog
+    ports:
+      - "3306"
+    volumes:
+      - microblog-mysql-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ENV_MYSQL_ROOTPW}
+      MYSQL_USER: ${ENV_MYSQL_USER}
+      MYSQL_PASSWORD: ${ENV_MYSQL_USERPW}
+      MYSQL_DATABASE: ${ENV_MYSQL_DATABASE}
+  microblog-es:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.1
+    restart: always
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
+    networks:
+      - microblog
+    ports:
+      - 9200:9200
+    volumes:
+      - microblog-es-volume:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+  microblog-app:
+    build: .
+    restart: always
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
+    networks:
+      - microblog
+    ports:
+      - "80:5000"
+    volumes:
+      - microblog-app-volume:/opt/microblog
+    depends_on:
+      - "microblog-es"
+      - "microblog-mysql"
+    environment:
+      DATABASE_TYPE: mysql
+      DB_PORT_3306_TCP_ADDR: microblog-mysql
+      DB_PORT_3306_TCP_PORT: 3306
+      ES_PORT_9200_TCP_ADDR: microblog-es
+      ES_PORT_9200_TCP_PORT: 9200
+      ELASTICSEARCH_URL: http://microblog-es:9200
+      DATABASE_URL: mysql+pymysql://${ENV_MYSQL_USER}:${ENV_MYSQL_USERPW}@microblog-mysql:3306/${ENV_MYSQL_DATABASE}
