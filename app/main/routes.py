@@ -18,6 +18,12 @@ def before_request():
         g.search_form = SearchForm() if current_app.elasticsearch else None
     g.locale = str(get_locale())
 
+@bp.route("/user/<username>/popup")
+@login_required
+def user_popup(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template("user_popup.html", user=user)
+
 @bp.route("/search")
 @login_required
 def search():

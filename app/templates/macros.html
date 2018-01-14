@@ -15,7 +15,7 @@
 {% endmacro %}
 
 {% macro nav_link(endpoint, name) %}
-    {% if request.endpoint.endswith(endpoint) %}
+    {% if request.endpoint and request.endpoint.endswith(endpoint) %}
         <li class="active"><a href="{{ url_for(endpoint, **kwargs) }}">{{name}}</a></li>
     {% else %}
         <li><a href="{{ url_for(endpoint, **kwargs) }}">{{name}}</a></li>

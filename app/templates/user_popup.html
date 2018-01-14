@@ -1,0 +1,40 @@
+<table class="table table-popup">
+    <tr>
+        <td>
+            <img src="{{ user.avatar(64) }}">
+        </td>
+        <td>
+            <p>
+                <a href="{{ url_for('main.user', username=user.username) }}">
+                    {{ user.username }}
+                </a>
+            </p>
+            <small>
+                {% if user.about_me %}
+                <p>
+                    {{ user.about_me }}
+                </p>
+                {% endif %}
+                {% if user.last_seen %}
+                <p>
+                    {{ _("Last seen on: %(date)s", date=moment(user.last_seen).calendar()) }}
+                </p>
+                {% endif %}
+                <p>
+                    {{ _("%(followers)d followers, %(followed)d following", followers=user.followers.count(), followed=user.followed.count()) }}
+                </p>
+                {% if user != current_user %}
+                    {% if not current_user.is_following(user) %}
+                    <p>
+                        <a href="{{ url_for('main.follow', username=user.username) }}">{{ _("Follow this user") }}</a>
+                    </p>
+                    {% else %}
+                    <p>
+                        <a href="{{ url_for('main.unfollow', username=user.username) }}">{{ _("Unfollow this user") }}</a>
+                    </p>
+                    {% endif %}
+                {% endif %}
+            </small>
+        </td>
+    </tr>
+</table>
