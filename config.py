@@ -20,3 +20,4 @@ class Config(object):
     ELASTICSEARCH_URL = os.environ.get("ELASTICSEARCH_URL")
     ERROR_HANDLER = os.environ.get("ERROR_HANDLER") or None
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
+    SESSION_COOKIE_NAME = "microblog"
