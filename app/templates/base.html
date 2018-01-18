@@ -29,6 +29,10 @@
                 $(destElem).text("{{ _('Error: could not contact server.') }}");
             });
         }
+        function set_message_count(n) {
+            $('#message_counter').text(n);
+            $('#message_counter').css('visibility', n ? 'visible' : 'hidden');
+        }
         $(function() {
             var timer = null;
             var xhr = null;
@@ -68,6 +72,23 @@
                 }
             );
         });
+        {% if current_user.is_authenticated %}
+        $(function() {
+            var since = 0;
+            setInterval(function() {
+                $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
+                    function(n) {
+                        for(var i=0; i < n.length; i++) {
+                            if(n[i].name == 'unread_message_count') {
+                                set_message_count(n[i].data)
+                            }
+                            since = n[i].timestamp;
+                        }
+                    }
+                );
+            }, 10000);
+        });
+        {% endif %}
     </script>
 {% endblock %}
 
@@ -98,9 +119,10 @@
                         {% else %}
                             {% set msg_counter %}
                                 {% set new_messages = current_user.new_messages() %}
-                                {% if new_messages %}
-                                <span class="badge">{{ new_messages }}</span>
-                                {% endif %}
+                                <span id="message_counter" class="badge"
+                                    style="visibility: {{ 'visible' if new_messages else 'hidden' }};">
+                                    {{ new_messages }}
+                                </span>
                             {% endset %}
                             {{ macros.nav_link('main.messages', _('Messages'), misc=msg_counter) }}
                             {{ macros.nav_link('main.explore', _('Explore')) }}

@@ -51,7 +51,7 @@ mysql -u root -p${DB_ROOT} -e "flush privileges;"
 
 mkdir certs
 openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout certs/key.pem -out certs/cert.pem \
-    -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=selfsigned.com"
+    -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=selfsigned.com" > /dev/null 2>&1
 
 cp -a /automated/microblog /etc/nginx/sites-enabled/microblog
 cp -a /automated/microblog.conf /etc/supervisor/conf.d/microblog.conf
