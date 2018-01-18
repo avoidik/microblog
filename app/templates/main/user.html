@@ -24,17 +24,28 @@
                         {{ _("%(followers)d followers, %(followed)d following", followers=user.followers.count(), followed=user.followed.count()) }}
                     </p>
                     {% if user == current_user %}
-                    <p>
+                    <span>
                         <a href="{{ url_for('main.edit_profile') }}">{{ _("Edit profile") }}</a>
-                    </p>
-                    {% elif not current_user.is_following(user) %}
-                    <p>
-                        <a href="{{ url_for('main.follow', username=user.username) }}">{{ _("Follow this user") }}</a>
-                    </p>
+                    </span>
                     {% else %}
-                    <p>
-                        <a href="{{ url_for('main.unfollow', username=user.username) }}">{{ _("Unfollow this user") }}</a>
-                    </p>
+                        {% if not current_user.is_following(user) %}
+                        <span>
+                            <a href="{{ url_for('main.follow', username=user.username) }}">
+                                {{ _("Follow this user") }}
+                            </a>
+                        </span>
+                        {% else %}
+                        <span>
+                            <a href="{{ url_for('main.unfollow', username=user.username) }}">
+                                {{ _("Unfollow this user") }}
+                            </a>
+                        </span>
+                        {% endif %}
+                        <span>
+                            <a href="{{ url_for('main.send_message', recipient=user.username) }}">
+                                {{ _("Send message") }}
+                            </a>
+                        </span>
                     {% endif %}
                 </td>
             </tr>

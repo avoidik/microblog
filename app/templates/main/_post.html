@@ -28,5 +28,12 @@
             </span>
             {% endif %}
         </td>
+        <td width="1%" style="white-space: nowrap">
+            <span>
+                <a href="{{ url_for('main.send_message', recipient=post.author.username) }}" class="btn btn-info">
+                    {{ _("Send message") }}
+                </a>
+            </span>
+        </td>
     </tr>
 </table>

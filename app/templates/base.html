@@ -96,6 +96,7 @@
                             {{ macros.nav_link('auth.login', _('Login')) }}
                             {{ macros.nav_link('auth.register', _('Register')) }}
                         {% else %}
+                            {{ macros.nav_link('main.messages', _('Messages')) }}
                             {{ macros.nav_link('main.explore', _('Explore')) }}
                             {{ macros.nav_link('main.user', _('Profile'), username=current_user.username) }}
                             <li role="separator" class="divider"></li>

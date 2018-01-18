@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h1>{{ _("Messages") }}</h1>
+            {% for post in messages %}
+                {% include 'main/_post.html' %}
+            {% endfor %}
+            {% include 'main/_nav.html' %}
+        </div>
+    </div>
+{% endblock %}

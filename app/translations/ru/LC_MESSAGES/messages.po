@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: microblog\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-12 11:38+0200\n"
-"PO-Revision-Date: 2018-01-12 11:39+0200\n"
+"POT-Creation-Date: 2018-01-18 16:03+0200\n"
+"PO-Revision-Date: 2018-01-18 16:04+0200\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "Войдите для доступа к этой странице."
 
-#: app/__init__.py:64
+#: app/__init__.py:65
 msgid "Microblog Error Report"
 msgstr "Отчет об ошибках Microblog"
 
@@ -122,7 +122,7 @@ msgid "Passwords doesn't match"
 msgstr "Пароли не совпадают"
 
 #: app/auth/forms.py:38 app/auth/routes.py:44
-#: app/templates/auth/register.html:5 app/templates/base.html:58
+#: app/templates/auth/register.html:5 app/templates/base.html:97
 msgid "Register"
 msgstr "Регистрация"
 
@@ -140,6 +140,7 @@ msgid "Reset"
 msgstr "Сброс"
 
 #: app/auth/forms.py:68 app/main/forms.py:16 app/main/forms.py:33
+#: app/main/forms.py:52
 msgid "Submit"
 msgstr "Отправить"
 
@@ -182,9 +183,9 @@ msgstr "Требуется текст для отправки"
 
 #: app/main/forms.py:31
 msgid "Post text length betweetn 5 and 140"
-msgstr "Длина текста для отправки между 5 и 140"
+msgstr "Длина текста для отправки от 5 до 140"
 
-#: app/main/forms.py:36 app/main/routes.py:36
+#: app/main/forms.py:36 app/main/routes.py:71
 msgid "Search"
 msgstr "Поиск"
 
@@ -192,50 +193,77 @@ msgstr "Поиск"
 msgid "Search query required"
 msgstr "Требуется поисковой запрос"
 
-#: app/main/routes.py:50
+#: app/main/forms.py:48
+msgid "Message"
+msgstr "Сообщение"
+
+#: app/main/forms.py:49
+msgid "Message text required"
+msgstr "Требуется текст сообщения"
+
+#: app/main/forms.py:50
+msgid "Message text length between 5 and 140"
+msgstr "Текст сообщения от 5 до 140"
+
+#: app/main/routes.py:34 app/templates/base.html:99
+#: app/templates/msg/messages.html:6
+msgid "Messages"
+msgstr "Сообщения"
+
+#: app/main/routes.py:46
+msgid "Your message has been sent"
+msgstr "Сообщение отправлено"
+
+#: app/main/routes.py:48 app/templates/main/_post.html:34
+#: app/templates/main/user.html:46
+msgid "Send message"
+msgstr "Отправить сообщение"
+
+#: app/main/routes.py:85
 msgid "Post added"
 msgstr "Запись добавлена"
 
-#: app/main/routes.py:60 app/templates/base.html:51
+#: app/main/routes.py:95 app/templates/base.html:90
 msgid "Home"
 msgstr "Главная"
 
-#: app/main/routes.py:76 app/templates/base.html:53 app/templates/base.html:61
+#: app/main/routes.py:111 app/templates/base.html:92
+#: app/templates/base.html:101
 msgid "Profile"
 msgstr "Профиль"
 
-#: app/main/routes.py:87
+#: app/main/routes.py:122
 msgid "Changes have been saved!"
 msgstr "Изменения сохранены!"
 
-#: app/main/routes.py:92 app/templates/main/edit_profile.html:6
+#: app/main/routes.py:127 app/templates/main/edit_profile.html:6
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: app/main/routes.py:99 app/main/routes.py:114
+#: app/main/routes.py:134 app/main/routes.py:149
 #, python-format
 msgid "User %(username)s is not found"
 msgstr "Пользователь %(username)s не найден"
 
-#: app/main/routes.py:102
+#: app/main/routes.py:137
 msgid "You can not follow yourself"
 msgstr "Вы не можете подписаться на себя"
 
-#: app/main/routes.py:106
+#: app/main/routes.py:141
 #, python-format
 msgid "Now you are following %(username)s"
 msgstr "Теперь вы подписаны на %(username)s"
 
-#: app/main/routes.py:117
+#: app/main/routes.py:152
 msgid "You can not unfollow yourself"
 msgstr "Вы не можете отписаться от себя"
 
-#: app/main/routes.py:121
+#: app/main/routes.py:156
 #, python-format
 msgid "Now you are not following %(username)s"
 msgstr "Теперь вы не подписаны на %(username)s"
 
-#: app/main/routes.py:135 app/templates/base.html:60
+#: app/main/routes.py:170 app/templates/base.html:100
 msgid "Explore"
 msgstr "Обзор"
 
@@ -247,21 +275,39 @@ msgstr "Добро пожаловать в Microblog"
 msgid "Error: could not contact server."
 msgstr "Ошибка: не удалось связаться с сервисом перевода."
 
-#: app/templates/base.html:56
+#: app/templates/base.html:95
 msgid "Select option"
 msgstr "Выберите опцию"
 
-#: app/templates/base.html:57
+#: app/templates/base.html:96
 msgid "Login"
 msgstr "Вход"
 
-#: app/templates/base.html:63
+#: app/templates/base.html:103
 msgid "Logout"
 msgstr "Выход"
 
 #: app/templates/search.html:4
 msgid "Search results"
 msgstr "Результаты поиска"
+
+#: app/templates/main/user.html:20 app/templates/user_popup.html:20
+#, python-format
+msgid "Last seen on: %(date)s"
+msgstr "Последний раз был: %(date)s"
+
+#: app/templates/main/user.html:24 app/templates/user_popup.html:24
+#, python-format
+msgid "%(followers)d followers, %(followed)d following"
+msgstr "%(followers)d подписчики, %(followed)d подписки"
+
+#: app/templates/main/user.html:34 app/templates/user_popup.html:29
+msgid "Follow this user"
+msgstr "Подписаться"
+
+#: app/templates/main/user.html:40 app/templates/user_popup.html:33
+msgid "Unfollow this user"
+msgstr "Отписаться"
 
 #: app/templates/auth/login.html:17
 msgid "New user?"
@@ -338,12 +384,12 @@ msgstr "Новее"
 msgid "Older"
 msgstr "Старее"
 
-#: app/templates/main/_post.html:14
+#: app/templates/main/_post.html:16
 #, python-format
 msgid "%(user_link)s said %(when)s:"
 msgstr "%(user_link)s написал %(when)s:"
 
-#: app/templates/main/_post.html:25
+#: app/templates/main/_post.html:27
 msgid "Translate this post"
 msgstr "Перевести эту запись"
 
@@ -357,24 +403,11 @@ msgstr "Привет, %(username)s!"
 msgid "User: %(username)s"
 msgstr "Пользователь: %(username)s"
 
-#: app/templates/main/user.html:20
-#, python-format
-msgid "Last seen on: %(date)s"
-msgstr "Последний раз был: %(date)s"
-
-#: app/templates/main/user.html:24
-#, python-format
-msgid "%(followers)d followers, %(followed)d following"
-msgstr "%(followers)d подписчики, %(followed)d подписки"
-
 #: app/templates/main/user.html:28
 msgid "Edit profile"
 msgstr "Изменить профиль"
 
-#: app/templates/main/user.html:32
-msgid "Follow this user"
-msgstr "Подписаться"
-
-#: app/templates/main/user.html:36
-msgid "Unfollow this user"
-msgstr "Отписаться"
+#: app/templates/msg/send_message.html:6
+#, python-format
+msgid "Send message to %(recipient)s"
+msgstr "Отправить сообщение %(recipient)s"
