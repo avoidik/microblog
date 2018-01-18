@@ -96,7 +96,13 @@
                             {{ macros.nav_link('auth.login', _('Login')) }}
                             {{ macros.nav_link('auth.register', _('Register')) }}
                         {% else %}
-                            {{ macros.nav_link('main.messages', _('Messages')) }}
+                            {% set msg_counter %}
+                                {% set new_messages = current_user.new_messages() %}
+                                {% if new_messages %}
+                                <span class="badge">{{ new_messages }}</span>
+                                {% endif %}
+                            {% endset %}
+                            {{ macros.nav_link('main.messages', _('Messages'), misc=msg_counter) }}
                             {{ macros.nav_link('main.explore', _('Explore')) }}
                             {{ macros.nav_link('main.user', _('Profile'), username=current_user.username) }}
                             <li role="separator" class="divider"></li>
