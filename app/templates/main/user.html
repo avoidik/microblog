@@ -27,6 +27,13 @@
                     <span>
                         <a href="{{ url_for('main.edit_profile') }}">{{ _("Edit profile") }}</a>
                     </span>
+                        {% if not current_user.get_task_in_progress('export_posts') %}
+                            <span>
+                                <a href="{{ url_for('main.export_posts') }}">
+                                    {{ _("Export posts") }}
+                                </a>
+                            </span>
+                        {% endif %}
                     {% else %}
                         {% if not current_user.is_following(user) %}
                         <span>

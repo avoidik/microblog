@@ -7,6 +7,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from hashlib import md5
 import jwt
 import json
+import redis
+import rq
 from app.search import add_to_index, query_index, remove_from_index
 
 followers = db.Table('followers',
@@ -78,9 +80,22 @@ class User(SearchableMixin, UserMixin, db.Model):
                         backref='recipient', lazy='dynamic')
     last_message_read_time = db.Column(db.DateTime)
     notifications = db.relationship('Notification', backref='user', lazy='dynamic')
+    tasks = db.relationship('Task', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def launch_task(self, name, description, *args, **kwargs):
+        rq_job = current_app.task_queue.enqueue('app.tasks.' + name, self.id, *args, **kwargs)
+        task = Task(id=rq_job.get_id(), name=name, description=description, user=self)
+        db.session.add(task)
+        return task
+
+    def get_tasks_in_progress(self):
+        return Task.query.filter_by(user=self, complete=False).all()
+
+    def get_task_in_progress(self, name):
+        return Task.query.filter_by(name=name, user=self, complete=False).first()
 
     def add_notification(self, name, data):
         self.notifications.filter_by(name=name).delete()
@@ -182,6 +197,24 @@ class Notification(db.Model):
     def get_data(self):
         return json.loads(str(self.payload_json))
 
+class Task(db.Model):
+    id = db.Column(db.String(36), primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(128))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    complete = db.Column(db.Boolean, default=False)
+
+    def get_rq_job(self):
+        rq_job = None
+        try:
+            rq_job = rq.job.Job.fetch(self.id, connection=current_app.redis)
+        except expression as identifier:
+            rq_job = None
+        return rq_job
+
+    def get_progress(self):
+        job = get_rq_job()
+        return job.meta.get('progress', 0) if job is not None else 100
 #
 
 db.event.listen(db.session, 'before_commit', Post.before_commit)

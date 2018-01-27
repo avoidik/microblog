@@ -21,3 +21,4 @@ class Config(object):
     ERROR_HANDLER = os.environ.get("ERROR_HANDLER") or None
     LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT")
     SESSION_COOKIE_NAME = "microblog"
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'

@@ -1,5 +1,6 @@
 VAGRANT_VERSION = "2"
 VM_BOX = "bento/ubuntu-16.04"
+USE_GIT_VERSION = false
 
 hosts = [
     {name: "microblog", ip: "192.168.33.10"}
@@ -16,7 +17,12 @@ Vagrant.configure(VAGRANT_VERSION) do |config|
 
     hosts.each_with_index do |elem, index|
         config.vm.define elem[:name] do |machine|
+            if USE_GIT_VERSION
             machine.vm.synced_folder ".", "/vagrant", disabled: true
+            else
+            machine.vm.synced_folder ".", "/opt/microblog", type: "rsync",
+                rsync__exclude: File.readlines('.gitignore').each(&:chomp!)
+            end
             machine.vm.synced_folder "./vagrant", "/automated"
             machine.vm.network :private_network, ip: elem[:ip]
             machine.vm.hostname = elem[:name]

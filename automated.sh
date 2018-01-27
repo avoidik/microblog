@@ -20,14 +20,18 @@ DEBIAN_FRONTEND=noninteractive apt-get -y install python3 python3-venv python3-d
 DB_ROOT=$(python3 -c "import uuid; print(uuid.uuid4().hex)")
 debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT}"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT}"
-DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server elasticsearch postfix supervisor nginx
+DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server elasticsearch postfix supervisor nginx redis-server
 
 sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
 systemctl restart elasticsearch
 
-mkdir -p /opt/microblog
-cd /opt/microblog
-git clone https://github.com/avoidik/microblog .
+if [[ ! -d "/opt/microblog" ]]; then
+  mkdir -p /opt/microblog
+  cd /opt/microblog
+  git clone https://github.com/avoidik/microblog .
+else
+  cd /opt/microblog
+fi
 pip3 install -U pip setuptools wheel
 python3 -m venv venv
 source venv/bin/activate
@@ -71,6 +75,8 @@ flask seed --no-destructive
 chown -R vagrant:vagrant /opt/microblog
 
 echo "export FLASK_APP=\"microblog.py\"" >> /home/vagrant/.profile
+echo "export LC_ALL=C.UTF-8" >> /home/vagrant/.profile
+echo "export LANG=C.UTF-8" >> /home/vagrant/.profile
 
 supervisorctl reload
 service nginx reload

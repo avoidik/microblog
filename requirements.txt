@@ -15,3 +15,4 @@ elasticsearch
 gunicorn
 pymysql
 psycopg2
+rq
