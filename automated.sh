@@ -23,10 +23,17 @@ apt-get -y install python3 python3-venv python3-dev python3-pip python3-setuptoo
 DB_ROOT=$(python3 -c "import uuid; print(uuid.uuid4().hex)")
 debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT}"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT}"
-apt-get -y install mysql-server elasticsearch postfix supervisor nginx redis-server
+apt-get -y install mysql-server postfix supervisor nginx redis-server apt-transport-https
 
-sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
+echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/es.list
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+apt-get -y update
+apt-get -y install openjdk-8-jre-headless elasticsearch
+
+systemctl daemon-reload
 systemctl restart elasticsearch
+systemctl enable elasticsearch.service
+systemctl start elasticsearch.service
 
 if [[ ! -d "/opt/microblog" ]]; then
   mkdir -p /opt/microblog

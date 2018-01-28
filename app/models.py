@@ -38,18 +38,25 @@ class SearchableMixin(object):
 
     @classmethod
     def after_commit(cls, session):
+        if session._changes is None:
+            return
         for obj in session._changes['add']:
             add_to_index(cls.__tablename__, obj)
         for obj in session._changes['update']:
             add_to_index(cls.__tablename__, obj)
         for obj in session._changes['delete']:
-            add_to_index(cls.__tablename__, obj)
+            remove_from_index(cls.__tablename__, obj)
         session._changes = None
 
     @classmethod
     def reindex(cls):
         for obj in cls.query:
             add_to_index(cls.__tablename__, obj)
+
+    @classmethod
+    def register(cls):
+        db.event.listen(db.session, 'before_commit', cls.before_commit)
+        db.event.listen(db.session, 'after_commit', cls.after_commit)
 
 @login.user_loader
 def load_user(id):
@@ -218,8 +225,5 @@ class Task(db.Model):
         return job.meta.get('progress', 0) if job is not None else 100
 #
 
-db.event.listen(db.session, 'before_commit', Post.before_commit)
-db.event.listen(db.session, 'after_commit', Post.after_commit)
-
-db.event.listen(db.session, 'before_commit', User.before_commit)
-db.event.listen(db.session, 'after_commit', User.after_commit)
+User.register()
+Post.register()
