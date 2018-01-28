@@ -44,6 +44,7 @@ class SearchableMixin(object):
             add_to_index(cls.__tablename__, obj)
         for obj in session._changes['delete']:
             add_to_index(cls.__tablename__, obj)
+        session._changes = None
 
     @classmethod
     def reindex(cls):
