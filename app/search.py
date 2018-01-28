@@ -22,8 +22,7 @@ def query_index(index, query, page, per_page):
             'query': {
                 'multi_match': {
                     'query': query,
-                    'fields': ['*'],
-                    'lenient': 'true'
+                    'fields': ['*']
                 }
             },
             'from': (page - 1) * per_page,
