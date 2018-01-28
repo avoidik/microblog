@@ -63,8 +63,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 class User(SearchableMixin, UserMixin, db.Model):
-    __searchable__ = ['username']
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True, nullable=False)
     email = db.Column(db.String(120), index=True, unique=True, nullable=False)
@@ -225,5 +223,4 @@ class Task(db.Model):
         return job.meta.get('progress', 0) if job is not None else 100
 #
 
-User.register()
 Post.register()
