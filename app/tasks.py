@@ -6,13 +6,14 @@ from app import create_app, db
 from app.models import Task, User, Post
 from app.email import send_email
 from flask import render_template
+from flask_babel import lazy_gettext as _l
 
 app = create_app()
 app.app_context().push()
 
 def example(seconds):
     job = get_current_job()
-    print('Starting task')
+    print(_l('Starting example task'))
     for i in range(seconds):
         job.meta['progress'] = 100.0 * i / seconds
         job.save_meta()
@@ -20,7 +21,7 @@ def example(seconds):
         time.sleep(1)
     job.meta['progress'] = 100
     job.save_meta()
-    print('Task completed')
+    print(_l('Example task completed'))
 
 def _set_task_progress(progress):
     job = get_current_job()
@@ -45,7 +46,7 @@ def export_posts(user_id):
             time.sleep(5)
             i += 1
             _set_task_progress(100 * i // total_posts)
-        send_email('[Microblog] Your blog posts',
+        send_email(_l('Your blog posts'),
                 sender=app.config['ADMINS'][0],
                 recipients=[user.email],
                 text_body=render_template('email/export_posts.txt', user=user),

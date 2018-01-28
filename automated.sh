@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
+
+export DEBIAN_FRONTEND=noninteractive
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+
 echo "en_US.UTF-8 UTF-8" > /var/lib/locales/supported.d/en
-DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure locales
+DEBCONF_NONINTERACTIVE_SEEN=true dpkg-reconfigure locales
 
 sed -i "s/[#]*PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 sed -i "s/UsePAM yes/UsePAM no/g" /etc/ssh/sshd_config
@@ -12,15 +15,15 @@ echo 'DPkg::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/ar
 echo 'APT::Update::Post-Invoke { "rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true"; };' >> /etc/apt/apt.conf.d/apt-clean
 echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";' >> /etc/apt/apt.conf.d/apt-clean
 
-DEBIAN_FRONTEND=noninteractive apt-get -y update
-DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-DEBIAN_FRONTEND=noninteractive apt-get -y install git-core ufw
-DEBIAN_FRONTEND=noninteractive apt-get -y install python3 python3-venv python3-dev python3-pip python3-setuptools
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install git-core ufw
+apt-get -y install python3 python3-venv python3-dev python3-pip python3-setuptools
 
 DB_ROOT=$(python3 -c "import uuid; print(uuid.uuid4().hex)")
 debconf-set-selections <<< "mysql-server mysql-server/root_password password ${DB_ROOT}"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${DB_ROOT}"
-DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server elasticsearch postfix supervisor nginx redis-server
+apt-get -y install mysql-server elasticsearch postfix supervisor nginx redis-server
 
 sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
 systemctl restart elasticsearch
@@ -59,6 +62,7 @@ openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout certs/key.pem -
 
 cp -a /automated/microblog /etc/nginx/sites-enabled/microblog
 cp -a /automated/microblog.conf /etc/supervisor/conf.d/microblog.conf
+cp -a /automated/worker.conf /etc/supervisor/conf.d/worker.conf
 rm -f /etc/nginx/sites-enabled/default
 
 ufw allow ssh

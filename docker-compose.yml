@@ -10,16 +10,29 @@ volumes:
     driver: "${ENV_VOLUME_DRIVER}"
   microblog-es-volume:
     driver: "${ENV_VOLUME_DRIVER}"
+  microblog-redis-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
+  microblog-worker-volume:
+    driver: "${ENV_VOLUME_DRIVER}"
 services:
+  microblog-redis:
+    container_name: redis
+    image: redis:3-alpine
+    restart: always
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
+    networks:
+      - microblog
+    volumes:
+      - microblog-redis-volume:/data
   microblog-mysql:
+    container_name: mysql
     image: mysql:5.7
     restart: always
     logging:
       driver: "${ENV_LOGGING_DRIVER}"
     networks:
       - microblog
-    ports:
-      - "3306"
     volumes:
       - microblog-mysql-volume:/var/lib/mysql
     environment:
@@ -28,20 +41,21 @@ services:
       MYSQL_PASSWORD: ${ENV_MYSQL_USERPW}
       MYSQL_DATABASE: ${ENV_MYSQL_DATABASE}
   microblog-es:
+    container_name: es
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.1.1
     restart: always
     logging:
       driver: "${ENV_LOGGING_DRIVER}"
     networks:
       - microblog
-    ports:
-      - 9200:9200
     volumes:
       - microblog-es-volume:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
   microblog-app:
+    container_name: app
     build: .
+    image: microblog
     restart: always
     logging:
       driver: "${ENV_LOGGING_DRIVER}"
@@ -50,15 +64,52 @@ services:
     ports:
       - "80:5000"
     volumes:
-      - microblog-app-volume:/opt/microblog
+      - microblog-app-volume:/home/microblog
     depends_on:
       - "microblog-es"
       - "microblog-mysql"
+      - "microblog-redis"
     environment:
-      DATABASE_TYPE: mysql
-      DB_PORT_3306_TCP_ADDR: microblog-mysql
-      DB_PORT_3306_TCP_PORT: 3306
-      ES_PORT_9200_TCP_ADDR: microblog-es
-      ES_PORT_9200_TCP_PORT: 9200
+      DB_TCP_ADDR: microblog-mysql
+      DB_TCP_PORT: 3306
+      ES_TCP_ADDR: microblog-es
+      ES_TCP_PORT: 9200
+      #MAIL_SERVER: ${ENV_MAIL_SERVER}
+      #MAIL_PORT: ${ENV_MAIL_PORT}
+      #MAIL_USE_TLS: ${ENV_MAIL_TLS}
+      #MAIL_USERNAME: ${ENV_MAIL_USER}
+      #MAIL_PASSWORD: ${ENV_MAIL_PASSWORD}
       ELASTICSEARCH_URL: http://microblog-es:9200
       DATABASE_URL: mysql+pymysql://${ENV_MYSQL_USER}:${ENV_MYSQL_USERPW}@microblog-mysql:3306/${ENV_MYSQL_DATABASE}
+      REDIS_URL: redis://microblog-redis:6379/0
+  microblog-worker:
+    container_name: worker
+    image: microblog
+    restart: always
+    logging:
+      driver: "${ENV_LOGGING_DRIVER}"
+    networks:
+      - microblog
+    volumes:
+      - microblog-worker-volume:/home/microblog
+    depends_on:
+      - "microblog-app"
+    environment:
+      DB_TCP_ADDR: microblog-mysql
+      DB_TCP_PORT: 3306
+      ES_TCP_ADDR: microblog-es
+      ES_TCP_PORT: 9200
+      #MAIL_SERVER: ${ENV_MAIL_SERVER}
+      #MAIL_PORT: ${ENV_MAIL_PORT}
+      #MAIL_USE_TLS: ${ENV_MAIL_TLS}
+      #MAIL_USERNAME: ${ENV_MAIL_USER}
+      #MAIL_PASSWORD: ${ENV_MAIL_PASSWORD}
+      ELASTICSEARCH_URL: http://microblog-es:9200
+      DATABASE_URL: mysql+pymysql://${ENV_MYSQL_USER}:${ENV_MYSQL_USERPW}@microblog-mysql:3306/${ENV_MYSQL_DATABASE}
+      REDIS_URL: redis://microblog-redis:6379/0
+    entrypoint:
+      - venv/bin/rq
+      - worker
+      - -u
+      - redis://microblog-redis:6379/0
+      - microblog-tasks

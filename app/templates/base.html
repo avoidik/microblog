@@ -33,6 +33,9 @@
             $('#message_counter').text(n);
             $('#message_counter').css('visibility', n ? 'visible' : 'hidden');
         }
+        function set_task_progress(task_id, progress) {
+            $('#' + task_id + '-progress').text(progress)
+        }
         $(function() {
             var timer = null;
             var xhr = null;
@@ -79,14 +82,19 @@
                 $.ajax('{{ url_for('main.notifications') }}?since=' + since).done(
                     function(n) {
                         for(var i=0; i < n.length; i++) {
-                            if(n[i].name == 'unread_message_count') {
-                                set_message_count(n[i].data)
+                            switch(n[i].name) {
+                                case 'unread_message_count':
+                                    set_message_count(n[i].data);
+                                    break;
+                                case 'task_progress':
+                                    set_task_progress(n[i].data.task_id, n[i].data.progress);
+                                    break;
                             }
                             since = n[i].timestamp;
                         }
                     }
                 );
-            }, 10000);
+            }, 5000);
         });
         {% endif %}
     </script>
@@ -147,6 +155,18 @@
 
 {% block content %}
     <div class="container">
+        {% if current_user.is_authenticated %}
+        {% with tasks = current_user.get_tasks_in_progress() %}
+        {% if tasks %}
+            {% for task in tasks %}
+            <div class="alert alert-success" role="alert">
+                {{ task.description }}
+                <span id="{{ task.id }}-progress">{{ task.get_progress() }}%</span>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% endif %}
         <div class="row">
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

@@ -208,12 +208,12 @@ class Task(db.Model):
         rq_job = None
         try:
             rq_job = rq.job.Job.fetch(self.id, connection=current_app.redis)
-        except expression as identifier:
+        except (redis.exceptions.RedisError, rq.exceptions.NoSuchJobError):
             rq_job = None
         return rq_job
 
     def get_progress(self):
-        job = get_rq_job()
+        job = self.get_rq_job()
         return job.meta.get('progress', 0) if job is not None else 100
 #
 

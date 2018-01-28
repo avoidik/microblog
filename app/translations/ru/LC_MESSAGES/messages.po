@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: microblog\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-18 16:03+0200\n"
-"PO-Revision-Date: 2018-01-18 16:04+0200\n"
+"POT-Creation-Date: 2018-01-28 18:58+0200\n"
+"PO-Revision-Date: 2018-01-28 19:02+0200\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: \n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: app/__init__.py:19
+#: app/__init__.py:21
 msgid "Please log in to access this page."
 msgstr "Войдите для доступа к этой странице."
 
-#: app/__init__.py:65
+#: app/__init__.py:70
 msgid "Microblog Error Report"
 msgstr "Отчет об ошибках Microblog"
 
@@ -32,6 +32,18 @@ msgstr "Отчет об ошибках Microblog"
 #, python-format
 msgid "Error in the %(field)s field - %(msg)s"
 msgstr "Ошибка в поле %(field)s - %(msg)s"
+
+#: app/tasks.py:16
+msgid "Starting example task"
+msgstr "Запуск тестовой задачи"
+
+#: app/tasks.py:24
+msgid "Example task completed"
+msgstr "Тестовая задача завершена"
+
+#: app/tasks.py:49
+msgid "Your blog posts"
+msgstr "Ваши блог-посты"
 
 #: app/translate.py:8
 msgid "Error: translation service is not configured."
@@ -122,7 +134,7 @@ msgid "Passwords doesn't match"
 msgstr "Пароли не совпадают"
 
 #: app/auth/forms.py:38 app/auth/routes.py:44
-#: app/templates/auth/register.html:5 app/templates/base.html:97
+#: app/templates/auth/register.html:5 app/templates/base.html:126
 msgid "Register"
 msgstr "Регистрация"
 
@@ -185,7 +197,7 @@ msgstr "Требуется текст для отправки"
 msgid "Post text length betweetn 5 and 140"
 msgstr "Длина текста для отправки от 5 до 140"
 
-#: app/main/forms.py:36 app/main/routes.py:71
+#: app/main/forms.py:36 app/main/routes.py:96
 msgid "Search"
 msgstr "Поиск"
 
@@ -205,65 +217,73 @@ msgstr "Требуется текст сообщения"
 msgid "Message text length between 5 and 140"
 msgstr "Текст сообщения от 5 до 140"
 
-#: app/main/routes.py:34 app/templates/base.html:99
+#: app/main/routes.py:25
+msgid "An export task is in progress already"
+msgstr "Задача экспорта данных уже запущена"
+
+#: app/main/routes.py:27
+msgid "Exporting posts..."
+msgstr "Выгрузка постов..."
+
+#: app/main/routes.py:58 app/templates/base.html:135
 #: app/templates/msg/messages.html:6
 msgid "Messages"
 msgstr "Сообщения"
 
-#: app/main/routes.py:46
+#: app/main/routes.py:71
 msgid "Your message has been sent"
 msgstr "Сообщение отправлено"
 
-#: app/main/routes.py:48 app/templates/main/_post.html:34
-#: app/templates/main/user.html:46
+#: app/main/routes.py:73 app/templates/main/_post.html:34
+#: app/templates/main/user.html:53
 msgid "Send message"
 msgstr "Отправить сообщение"
 
-#: app/main/routes.py:85
+#: app/main/routes.py:110
 msgid "Post added"
 msgstr "Запись добавлена"
 
-#: app/main/routes.py:95 app/templates/base.html:90
+#: app/main/routes.py:120 app/templates/base.html:119
 msgid "Home"
 msgstr "Главная"
 
-#: app/main/routes.py:111 app/templates/base.html:92
-#: app/templates/base.html:101
+#: app/main/routes.py:136 app/templates/base.html:121
+#: app/templates/base.html:137
 msgid "Profile"
 msgstr "Профиль"
 
-#: app/main/routes.py:122
+#: app/main/routes.py:147
 msgid "Changes have been saved!"
 msgstr "Изменения сохранены!"
 
-#: app/main/routes.py:127 app/templates/main/edit_profile.html:6
+#: app/main/routes.py:152 app/templates/main/edit_profile.html:6
 msgid "Edit Profile"
 msgstr "Изменить профиль"
 
-#: app/main/routes.py:134 app/main/routes.py:149
+#: app/main/routes.py:159 app/main/routes.py:174
 #, python-format
 msgid "User %(username)s is not found"
 msgstr "Пользователь %(username)s не найден"
 
-#: app/main/routes.py:137
+#: app/main/routes.py:162
 msgid "You can not follow yourself"
 msgstr "Вы не можете подписаться на себя"
 
-#: app/main/routes.py:141
+#: app/main/routes.py:166
 #, python-format
 msgid "Now you are following %(username)s"
 msgstr "Теперь вы подписаны на %(username)s"
 
-#: app/main/routes.py:152
+#: app/main/routes.py:177
 msgid "You can not unfollow yourself"
 msgstr "Вы не можете отписаться от себя"
 
-#: app/main/routes.py:156
+#: app/main/routes.py:181
 #, python-format
 msgid "Now you are not following %(username)s"
 msgstr "Теперь вы не подписаны на %(username)s"
 
-#: app/main/routes.py:170 app/templates/base.html:100
+#: app/main/routes.py:195 app/templates/base.html:136
 msgid "Explore"
 msgstr "Обзор"
 
@@ -275,15 +295,15 @@ msgstr "Добро пожаловать в Microblog"
 msgid "Error: could not contact server."
 msgstr "Ошибка: не удалось связаться с сервисом перевода."
 
-#: app/templates/base.html:95
+#: app/templates/base.html:124
 msgid "Select option"
 msgstr "Выберите опцию"
 
-#: app/templates/base.html:96
+#: app/templates/base.html:125
 msgid "Login"
 msgstr "Вход"
 
-#: app/templates/base.html:103
+#: app/templates/base.html:139
 msgid "Logout"
 msgstr "Выход"
 
@@ -301,11 +321,11 @@ msgstr "Последний раз был: %(date)s"
 msgid "%(followers)d followers, %(followed)d following"
 msgstr "%(followers)d подписчики, %(followed)d подписки"
 
-#: app/templates/main/user.html:34 app/templates/user_popup.html:29
+#: app/templates/main/user.html:41 app/templates/user_popup.html:29
 msgid "Follow this user"
 msgstr "Подписаться"
 
-#: app/templates/main/user.html:40 app/templates/user_popup.html:33
+#: app/templates/main/user.html:47 app/templates/user_popup.html:33
 msgid "Unfollow this user"
 msgstr "Отписаться"
 
@@ -406,6 +426,10 @@ msgstr "Пользователь: %(username)s"
 #: app/templates/main/user.html:28
 msgid "Edit profile"
 msgstr "Изменить профиль"
+
+#: app/templates/main/user.html:33
+msgid "Export posts"
+msgstr "Экспорт постов"
 
 #: app/templates/msg/send_message.html:6
 #, python-format

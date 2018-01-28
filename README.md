@@ -36,6 +36,35 @@ pybabel init -i messages.pot -d app/translations -l ru
 pybabel compile -d app/translations
 pybabel update -i messages.pot -d app/translations
 ```
+### Test Redis
+Start the worker
+```
+rq worker microblog-tasks
+```
+Enqueue the task
+```
+from redis import Redis
+import rq
+queue = rq.Queue('microblog-tasks', connection=Redis.from_url('redis://'))
+job = queue.enqueue('app.tasks.example', 10) # func, param
+job.get_id()
+job.refresh()
+job.meta.get('progress', 0)
+dir(job)
+```
+### Test Elasticsearch
+```
+from elasticsearch import Elasticsearch
+es = Elasticsearch('http://localhost:9200')
+es.index(index='my_index', doc_type='my_index', id=1, body={'text': 'this is a test'})
+es.index(index='my_index', doc_type='my_index', id=2, body={'text': 'this is a second test'})
+es.search(index='my_index', doc_type='my_index', body={'query': {'match': {'text': 'this is'}}})
+es.indices.delete('my_index')
+```
+Or directly with curl
+```
+curl -XPOST 'localhost:9200/_search?pretty' -d '{"query":{"multi_match":{"query":"this is","fields":["*"],"lenient":true}},"size":15,"from":0}'
+```
 ## Vagrant
 1. Start
 ```
@@ -66,11 +95,15 @@ heroku apps:create flask-microblog
 git remote -v
 heroku addons:add heroku-postgresql:hobby-dev
 heroku config:set LOG_TO_STDOUT=1
-heroku addons:create searchbox:starter
+heroku addons:create searchbox:starter # elasticsearch addon
+heroku addons:create heroku-redis:hobby-dev # redis addon
 heroku config:get SEARCHBOX_URL
 heroku config:set ELASTICSEARCH_URL=...
 heroku config:set FLASK_APP=microblog.py
+...
+heroku ps:scale worker=1
 ```
+Heroku addons requires validated account (linked credit-card), but they're on a free-plan (without expenses)
 ## Docker
 ```
 docker-machine create microblog

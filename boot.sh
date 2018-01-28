@@ -7,13 +7,9 @@ wait_for_connection() {
   done
 }
 
-case "${DATABASE_TYPE}" in
-    "postgresql") wait_for_connection "${DB_PORT_5432_TCP_ADDR}" "${DB_PORT_5432_TCP_PORT}" ;;
-    "mysql") wait_for_connection "${DB_PORT_3306_TCP_ADDR}" "${DB_PORT_3306_TCP_PORT}" ;;
-    *) ;;
-esac
+wait_for_connection "${DB_TCP_ADDR}" "${DB_TCP_PORT}"
 
-wait_for_connection "${ES_PORT_9200_TCP_ADDR}" "${ES_PORT_9200_TCP_PORT}"
+wait_for_connection "${ES_TCP_ADDR}" "${ES_TCP_PORT}"
 
 source venv/bin/activate
 flask translate compile
