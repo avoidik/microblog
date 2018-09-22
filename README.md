@@ -58,6 +58,7 @@ from elasticsearch import Elasticsearch
 es = Elasticsearch('http://localhost:9200')
 es.index(index='my_index', doc_type='my_index', id=1, body={'text': 'this is a test'})
 es.index(index='my_index', doc_type='my_index', id=2, body={'text': 'this is a second test'})
+es.indices.refresh(index='my_index')
 es.search(index='my_index', doc_type='my_index', body={'query': {'match': {'text': 'this is'}}})
 es.indices.delete('my_index')
 ```
